@@ -1,0 +1,696 @@
+// compute world bounding box and replace pivot
+global proc pivotModifer ( string $space, string $addLoc, int $a_X, int $a_Y, int $a_Z, string $target ) {
+    float $a;
+    float $bb_X_mid; 
+    float $bb_Y_mid;
+    float $bb_Z_mid;
+    float $bbr[];
+    // gui overwrite for argumets
+    if (`checkBox -q -ex addLocMovePivotCheckBox` == 1){
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 1)&&(`checkBox -q -v setPivotCheckBox` == 0)){
+            $addLoc = "l";
+        }
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 1)&&(`checkBox -q -v setPivotCheckBox` == 1)){
+            $addLoc = "pl";
+        }
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 0)&&(`checkBox -q -v setPivotCheckBox` == 1)){
+            $addLoc = "p";
+        }
+        if (`checkBox -q -v worldModePivotCheckBox` == 1){
+            $space = "w";
+        }
+        if (`checkBox -q -v localModePivotCheckBox` == 1){
+            $space = "l";
+        }
+    }
+    // check whether $target instance
+    string $selShapes[] = `ls -s -dag $target`;
+    string $selShapesParent[] = `listRelatives -f -ap $selShapes[0]`;
+    if ( `size $selShapesParent`  > 1 ) {
+        warning ( $target  + " is instance!\n" + $selShapesParent[0] + " is a new target" );
+        $target = $selShapesParent[0];        
+    }
+    //prepare for duplicate target
+    string $tmpTargetName = (`substituteAllString $target "|" "_"` + "_tmp"); // temp node for compute bounding box
+    string $tmpTargetName = `substituteAllString $tmpTargetName ":" "_"`;
+    string $pM_grp = "pivotModiferTmp_grp";       // temp group
+    duplicate -rr -n $tmpTargetName $target;      
+    //prepare duplicate and pivotModiferTmp_grp
+    string $checkWP[] = `listRelatives -ap $tmpTargetName`;
+    if ( $checkWP[0] != "" ) parent -w $tmpTargetName;
+    string $wParent[] = `listRelatives -f -p $tmpTargetName`;
+    if ( `objExists $pM_grp` == 0 ) createNode -n $pM_grp transform;
+    parent -a $tmpTargetName $pM_grp;
+    if ( $wParent[0] != "" ) delete $wParent[0];
+    //clearing pivotModiferTmp_grp
+    string $pM_grp_rem[] = `listRelatives -f -ad -typ "nurbsCurve" -typ "locator" -typ "transform" -typ "RMSGeoAreaLight" $pM_grp `;
+    for ($node in $pM_grp_rem){
+        if ((`nodeType $node` == "nurbsCurve")||(`nodeType $node` == "locator")) delete $node;
+        if ((`objExists $node` == 1)&&(`nodeType $node` == "RMSGeoAreaLight")){
+            string $shapeType = `getAttr ($node + ".shape")`;
+            string $tmpNameTok[];
+            string $tmpNameSub = `substituteAllString $node ":" "#"`;
+            string $tmpNameSub = `substituteAllString $node "|" "#"`;
+            tokenize $tmpNameSub "#" $tmpNameTok;
+            int $iz = `size $tmpNameTok `;
+            string $tmpName = ( $tmpNameTok[$iz-1] + "_proxy" ); 
+            if ( $shapeType == "rect" ){
+                polyPlane -w 1 -h 1 -sx 2 -sy 2 -ax 0 0 0 -cuv 2 -ch 0 -n $tmpName;
+                parent -r $tmpName $node;
+                delete $node;
+            }
+            if ( $shapeType == "disk" ){
+                polyCylinder -r 0.5 -h 0.5 -sx 20 -sy 1 -sz 1 -ax 0 0 1 -rcp 0 -cuv 3 -ch 0 -n $tmpName;
+                xform -t 0 0 -0.25 $tmpName;
+                parent -r $tmpName $node;
+                delete $node;
+            }
+            if ( $shapeType == "sphere" ){
+                polySphere -r 0.5 -sx 20 -sy 20 -ax 0 0 1 -cuv 2 -ch 0 -n $tmpName;
+                parent -r $tmpName $node;
+                delete $node;
+            }
+            if ( $shapeType == "cylinder" ){
+                polyCylinder -r 0.5 -h 1 -sx 20 -sy 1 -sz 1 -ax 1 0 0 -rcp 0 -cuv 3 -ch 0 -n $tmpName;
+                parent -r $tmpName $node;
+                delete $node;                
+            }
+            if ( $shapeType == "distant" ){
+                polyCylinder -r 0.1 -h 0.5 -sx 20 -sy 1 -sz 1 -ax 0 0 1 -rcp 0 -cuv 3 -ch 0 -n $tmpName;
+                xform -os -t 0 0 -0.25 $tmpName;
+                parent -r -s $tmpName `listRelatives -p $node`;
+                delete $node;                
+
+            }
+            if ( $shapeType == "spot" ){
+                string $tmpName = ( $node + "_tmpGEO" );
+                polyCylinder -r 0.5 -h 1 -sx 20 -sy 1 -sz 1 -ax 0 0 1 -rcp 0 -cuv 3 -ch 0 -n $tmpName;
+                xform -t 0 0 -0.5 $tmpName;
+                parent -r $tmpName $node;
+                delete $node;               
+            }
+        }
+        if ((`objExists $node` == 1)&&(`nodeType $node` == "transform")){
+            string $nodeChil[] = `listRelatives -ad $node`;
+            if ( $nodeChil[0] == "" ) delete $node;
+        }
+    }    
+    
+    //makeIdentity  pivotModiferTmp_grp
+    /*if ( $space == "l" ){
+        if ( `size $selShapesParent` <= 1 ) makeIdentity -t 1 -r 1 -s 1 -n 0 $pM_grp;
+    }*/
+    if ( $space == "w" ){
+        if ( `size $selShapesParent` <= 1 ) makeIdentity -a true -t 1 -r 1 -s 1 -n 0 $pM_grp;
+    }
+    
+    
+    //get  pivotModiferTmp_grp bounding box
+    float $bbr[] = `xform -q -bb $pM_grp `;
+    
+    // compute pivot position
+    if ( $bbr[0] > $bbr[3] ) {
+        $a = $bbr[0] - $bbr[3]; 
+        $bb_X_mid = $bbr[0] - $a*0.5*(2-$a_X);
+    }else{
+        $a = $bbr[3] - $bbr[0]; 
+        $bb_X_mid = $bbr[3] - $a*0.5*(2-$a_X);
+    }
+
+    if ( $bbr[1] > $bbr[4] ) {
+        $a = $bbr[1] - $bbr[4]; 
+        $bb_Y_mid = $bbr[1] - $a*0.5*(2-$a_Y);
+    }else{
+        $a = $bbr[4] - $bbr[1]; 
+        $bb_Y_mid = $bbr[4] - $a*0.5*(2-$a_Y);
+    }
+
+    if ( $bbr[2] > $bbr[5] ) {
+        $a = $bbr[2] - $bbr[5]; 
+        $bb_Z_mid = $bbr[2] - $a*0.5*(2-$a_Z);
+    }else{
+        $a = $bbr[5] - $bbr[2]; 
+        $bb_Z_mid = $bbr[5] - $a*0.5*(2-$a_Z);
+    }
+    // set local pivot
+    if ( $space == "l" ){
+        float $rpp[];
+        float $wsr[];
+        // set local pivot position
+        if (($addLoc == "p")||($addLoc == "pl")){
+            string $dopName[] = `ls $target`;
+            string $dopNameC = `substituteAllString $dopName[0] "|" "_"`;
+            string $dopNameC = `substituteAllString $dopNameC ":" "_"`;
+            string $locName = ($dopNameC + "_locator" + "_X" + $a_X+ "_Y" + $a_Y+ "_Z" + $a_Z);
+            if (`objExists $locName` != 1) {
+                spaceLocator -n $locName -p $bb_X_mid $bb_Y_mid $bb_Z_mid;
+                xform  -ws -piv $bb_X_mid $bb_Y_mid $bb_Z_mid $locName;
+                parent -a $locName $pM_grp;
+                parent -r $pM_grp $target;
+                $rpp = `xform -q -ws -rp $locName`;
+                $wsr = `xform -q -ws -ro $locName`;
+                xform  -ws -piv $rpp[0] $rpp[1] $rpp[2] $target;
+                delete $locName;
+            }
+        }
+        // set local locator on new pivot position
+        if (($addLoc == "l")||($addLoc == "pl")){
+            string $dopName[] = `ls $target `;
+            string $dopNameC = `substituteAllString $dopName[0] "|" "_"`;
+            string $dopNameC = `substituteAllString $dopNameC ":" "_"`;
+            string $locName = ($dopNameC + "_locator" + "_X" + $a_X+ "_Y" + $a_Y+ "_Z" + $a_Z);
+            if (`objExists $locName` != 1) {
+                spaceLocator -n $locName;
+                parent -r $locName $target;
+                xform -ws -t $rpp[0] $rpp[1] $rpp[2];
+            }
+        }    
+        manipMoveContext -edit -mode 0 Move;
+    }
+    // set world pivot
+    if ( $space == "w" ){
+        // set world pivot position
+        if (($addLoc == "p")||($addLoc == "pl")){
+            string $dopName[] = `ls $target `;
+            string $dopNameC = `substituteAllString $dopName[0] "|" "_"`;
+            string $dopNameC = `substituteAllString $dopNameC ":" "_"`;
+            string $locName = ($dopNameC + "_locator" + "_X" + $a_X+ "_Y" + $a_Y+ "_Z" + $a_Z);
+            if (`objExists $locName` != 1) {
+                xform  -ws -piv $bb_X_mid $bb_Y_mid $bb_Z_mid $target;
+            }
+        }
+        // set world locator on new pivot position
+        if (($addLoc == "l")||($addLoc == "pl")){
+            string $dopName[] = `ls $target`;
+            string $dopNameC = `substituteAllString $dopName[0] "|" "_"`;
+            string $dopNameC = `substituteAllString $dopNameC ":" "_"`;
+            string $locName = ($dopNameC + "_locator" + "_X" + $a_X+ "_Y" + $a_Y+ "_Z" + $a_Z);
+            if (`objExists $locName` != 1) {
+                spaceLocator -n $locName -p $bb_X_mid $bb_Y_mid $bb_Z_mid;
+                xform  -ws -piv $bb_X_mid $bb_Y_mid $bb_Z_mid $locName;
+                parent -a $locName $target;
+            }
+        }
+        manipMoveContext -edit -mode 2 Move;
+    }
+    if ( `objExists $pM_grp ` == 1 ) delete $pM_grp;    
+}
+
+
+// parent RIB on GPU from Yashka Data
+global proc ribParentSys() {
+    string $system_tr = "|system";
+    string $gpu_cache_tr = ( $system_tr + "|gpu_cache" );
+    string $rib_cache_tr = ( $system_tr + "|rib_cache" );
+    string $all_gpu_tr_nosort[] = {};
+    string $all_rib_tr_nosort[] = {};
+    string $all_gpu_tr_n[] = {};
+    string $all_rib_tr_n[] = {};
+    string $all_gpu_tr_n_sort[] = {};
+    string $all_rib_tr_n_sort[] = {};
+    string $all_gpu_tr_sort[] = {};
+    string $all_rib_tr_sort[] = {};
+    string $all_gpu[] = `listRelatives -f -ad -typ gpuCache $gpu_cache_tr `;
+    string $all_rib[] = `listRelatives -f -ad -typ locator $rib_cache_tr `;
+    int $r;
+    int $g;
+    int $all_gpu_size = `size $all_gpu `;
+    int $all_rib_size = `size $all_rib`;
+    for ( $g=0; $g<$all_gpu_size; ++$g) {
+        string $gpuTr[] = `listRelatives -f -p $all_gpu[$g]`;
+        string $gpuTrShort[] = `listRelatives -p $all_gpu[$g]`;
+        pivotModifer w p 1 0 1 $gpuTr[0];
+        stringArrayInsertAtIndex ($g, $all_gpu_tr_nosort, $gpuTr[0]);
+        string $tokGpu[] = {};
+        tokenize $gpuTr[0] "|" $tokGpu;
+        $tokGpu[2] = `substitute "_gpu" $tokGpu[2] ""`;
+        stringArrayInsertAtIndex ($g, $all_gpu_tr_n, $tokGpu[2]);
+    }
+    for ( $r=0; $r<$all_rib_size; ++$r ) {
+        string $ribTr[] = `listRelatives -f -p $all_rib[$r]`;
+        stringArrayInsertAtIndex ($r, $all_rib_tr_nosort, $ribTr[0]);
+        string $tokRib[] = {};
+        tokenize $ribTr[0] "|" $tokRib;
+        $tokRib[2] = `substitute "_rib" $tokRib[2] ""`;
+        stringArrayInsertAtIndex ($r, $all_rib_tr_n, $tokRib[2]);
+    }
+    
+    
+    
+    int $all_gpu_tr_n_z = `size $all_gpu_tr_n `;    
+    int $all_rib_tr_n_z = `size $all_rib_tr_n `;
+    for ( $g=0; $g<$all_gpu_tr_n_z; ++$g) {
+        for ( $r=0; $r<$all_rib_tr_n_z; ++$r){
+            if ($all_gpu_tr_n[$g] == $all_rib_tr_n[$r]){
+                stringArrayInsertAtIndex (0, $all_gpu_tr_sort, $all_gpu_tr_nosort[$g]);
+                stringArrayInsertAtIndex (0, $all_rib_tr_sort, $all_rib_tr_nosort[$r]);
+                stringArrayInsertAtIndex (0, $all_gpu_tr_n_sort, $all_gpu_tr_n[$g]);
+                stringArrayInsertAtIndex (0, $all_rib_tr_n_sort, $all_rib_tr_n[$r]);
+            }        
+        }
+    }
+   
+    if  ( $all_gpu_tr_n_z > $all_rib_tr_n_z ){
+        string $diff[] = stringArrayRemove( $all_rib_tr_n, $all_gpu_tr_n);
+        for ( $node in $diff ){
+            warning ( $node + "_rib does not exist" );
+        }
+        warning "the number of GPU greater than the number of RIB";
+    }
+    if ( $all_rib_tr_n_z > $all_gpu_tr_n_z ){
+        string $diff[] = stringArrayRemove( $all_gpu_tr_n, $all_rib_tr_n);
+        for ( $node in $diff ){
+            warning ( $node + "_gpu does not exist" );
+        }
+        warning "the number of RIB greater than the number of GPU";
+    }
+
+ 
+
+    string $rP_grp = "systemParented_grp";
+    if ( `objExists $rP_grp` == 0 ) createNode -n $rP_grp transform;
+ 
+    int $all_gpu_tr_sort_z = `size $all_gpu_tr_n_sort`;    
+    int $all_rib_tr_sort_z = `size $all_rib_tr_n_sort`;
+    for ( $i=0; $i<$all_gpu_tr_sort_z; ++$i){
+        string $gpu_instance_tr_n = $all_gpu_tr_n_sort[$i] + "_instance_gpu";
+        string $rib_instance_tr_n = $all_rib_tr_n_sort[$i] + "_instance_rib";
+        if ( (`objExists $gpu_instance_tr_n` == 0)&&(`objExists $rib_instance_tr_n` == 0)){
+            duplicate -ic -n $gpu_instance_tr_n $all_gpu_tr_sort[$i];
+            duplicate -ic -n $rib_instance_tr_n $all_rib_tr_sort[$i];
+            parent -r $rib_instance_tr_n $gpu_instance_tr_n;
+            parent -r $gpu_instance_tr_n $rP_grp;
+        }
+    }
+    hide "system";
+    select $rP_grp;
+ }
+ 
+ 
+// parent alembic geocashe with rib on animators gpu cache
+global proc ribParentAnmGPU( int $fixRt, int $fixTr ){
+    float $rotate[] = {};
+    float $resultRO[] = {};
+    string $selParent[] = {};
+    string $uniqueParent;
+    
+    float $rotateX = `floatField -q -v fixRotateIntField_X`;
+    float $rotateY = `floatField -q -v fixRotateIntField_Y`;
+    float $rotateZ = `floatField -q -v fixRotateIntField_Z`;
+    
+    float $translateX = `floatField -q -v fixTranslateIntField_X`;
+    float $translateY = `floatField -q -v fixTranslateIntField_Y`;
+    float $translateZ = `floatField -q -v fixTranslateIntField_Z`;
+
+        
+    string $selRibGpu[] = `ls -l -os -tr`;
+    int $selSize = `size $selRibGpu`;
+    string $selParent[] = $selRibGpu;
+    string $selChil = $selRibGpu[$selSize-1];
+    stringArrayRemoveAtIndex (($selSize - 1), $selParent);
+    for ($parentNode in $selParent){
+        string $selShapesParent[] = `listRelatives -f -ap $parentNode `;
+        if ( `size $selShapesParent`  > 1 ) {
+            warning ( $parentNode  + " is instance!\n" + $selShapesParent[0] + " is a new target" );            
+            $parentNode = $selShapesParent[0];
+        }
+
+
+        string $selChilTok[] = {};
+        tokenize $selChil "|" $selChilTok;
+        
+        string $selChilDup = ( $selChilTok[(`size $selChilTok` - 1)] +  "_chil");
+        string $selChilDupLN[] = `duplicate -ic -n $selChilDup $selChil `;
+        // set pivot on center of botom
+        pivotModifer w pl 1 0 1 $selChilDupLN[0];
+        pivotModifer w pl 1 0 1 $parentNode;
+        // set rotation from parent on target
+        float $resultRO[] = `xform -q -ws -ro $parentNode `;
+        if ($fixRt == 0){
+            xform -ws -ro $resultRO[0] $resultRO[1] $resultRO[2] $selChilDupLN[0];
+            floatField -e -v $resultRO[0] fixRotateIntField_X;
+            floatField -e -v $resultRO[1] fixRotateIntField_Y;
+            floatField -e -v $resultRO[2] fixRotateIntField_Z;
+        }
+        if ($fixRt == 1){
+            xform -ro $rotateX $rotateY $rotateZ $selChilDupLN[0];
+        }
+        // set pivot on center of botom
+        pivotModifer w pl 1 0 1 $selChilDupLN[0];
+        pivotModifer w pl 1 0 1 $parentNode;
+        // set target on 0 grid
+        // float $resultRP[] = `xform -q -rp $selChilDupLN[0]`;
+        // xform -t (0 - $resultRP[0]) (0 - $resultRP[1]) (0 - $resultRP[2]) $selChilDupLN[0];
+        // parent $selChilDupLN on $parentNode
+        string $selChilDupLN_P[0] = `parent -a $selChilDupLN[0] $parentNode `;
+        // get parent world space pivot
+        float $curRP_p[] = `xform -q -ws -rp $parentNode `;
+        // correct target transformatiom based on target world space pivot
+        float $curRP_c[] = `xform -q -ws -rp $selChilDupLN_P[0]`;
+        float $curTR[] = `xform -q -ws -t $selChilDupLN_P[0]`;
+        float $resultTR[];
+        
+        for ($i=0; $i<3; ++$i) {
+            $resultTR[$i] = $curTR[$i] - $curRP_c[$i] + $curRP_p[$i];
+        }
+        
+        /*
+        float $result[] = {};
+        float $result_dif[] = {};
+        
+        for ($i=0; $i<3; ++$i) {
+            if ( ($curRP_p[$i] > $curRP_c[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = $curRP_p[$i] - $curRP_c[$i];
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+            if ( ($curRP_c[$i] > $curRP_p[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = $curRP_c[$i] - $curRP_p[$i];
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+            if ( ($curRP_c[$i] == $curRP_p[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = 0;
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+        }
+        */
+        
+        if ( $fixTr == 1 ){            
+            $curTR[0] = $translateX;
+            $curTR[1] = $translateY;
+            $curTR[2] = $translateZ;
+        }
+        if ( $fixTr == 0 ){
+            floatField -e -v $curTR[0] fixTranslateIntField_X;
+            floatField -e -v $curTR[1] fixTranslateIntField_Y;
+            floatField -e -v $curTR[2] fixTranslateIntField_Z;
+        }
+        xform -ws -t $resultTR[0] $resultTR[1] $resultTR[2] $selChilDupLN_P[0];
+        /* if ($fixRt == 0){
+            xform -a -ro $resultRO[0] $resultRO[1] $resultRO[2] $selChilDupLN_P[0];
+            floatField -e -v $resultRO[0] fixRotateIntField_X;
+            floatField -e -v $resultRO[1] fixRotateIntField_Y;
+            floatField -e -v $resultRO[2] fixRotateIntField_Z;
+        }
+        if ($fixRt == 1){
+            xform -ro $rotateX $rotateY $rotateZ $selChilDupLN_P[0];
+        }*/
+    }
+}
+
+
+// replace gpu on abc
+global proc convertGpuAbc(){
+    string $sel[] = `ls -sl`;
+    string $gpcList[] = `listRelatives -ad -f -typ "gpuCache" $sel`;
+
+    string $abcPathAllNode[];
+    string $trList[];
+    string $paL[];
+    int $n = -1;
+    int $nn = 0;
+
+    for ($gpcNode in $gpcList){
+        string $na = ++$n;
+        string $AlembicNodeName = ( "AlembicNode_" + $na );
+        string $gpcNodeParent[] = `listRelatives  -f -p $gpcNode`;
+
+        string $abcPathNode = `getAttr -as ( $gpcNode + ".cacheFileName" )`;
+        
+        createNode transform -p $gpcNodeParent[0] -n "abcFromGpu_grp";
+        
+        if ( `objExists "abcFromGpuRoot_grp"` == 0 ){
+                createNode transform -n "abcFromGpuRoot_grp";
+            } else {
+                print "abcFromGpuRoot_grp exist";
+            }
+        
+        string $abcFromGpu_grp = ( $gpcNodeParent[0] + "|abcFromGpu_grp" );
+        
+        AbcImport -mode import -rpr $abcFromGpu_grp $abcPathNode;
+        parent $abcFromGpu_grp abcFromGpuRoot_grp;
+    }
+}
+
+// control compute prman shadow passes 
+global proc prmanPassComputeControl ( int $mode, string $type ){
+    if ($type == "shadow"){
+        string $allConnection[]={};
+        string $sel[] =  `ls -sl`;
+        string $sel_light[] = `listRelatives -ad -typ RMSGeoAreaLight -typ RMSEnvLight $sel`;
+        select -cl;
+        if (`size $sel_light` > 0){
+            for ($i=0; $i<`size $sel_light`; ++$i) {      
+                string $nodeConnections[] = `listConnections $sel_light[$i]`;
+                for ($n=0; $n<`size $nodeConnections`; ++$n) {
+                    if  
+                    ((`attributeExists "rman__riopt__limits_deepshadowerror" $nodeConnections[$n]` == 1)
+                    &&
+                    (`attributeExists "rman__riopt__limits_deepshadowsimplifyerror" $nodeConnections[$n]` == 1)
+                    && 
+                    (`attributeExists "rman__riopt__Format_resolution" $nodeConnections[$n]` == 1)
+                    &&
+                    (`attributeExists "rman__torattr___computeBehavior" $nodeConnections[$n]` == 1))
+                    {
+                        stringArrayInsertAtIndex ( 0, $allConnection, $nodeConnections[$n] );
+                    }
+                }
+            }
+            if (`getModifiers` == 0 ){
+                string $prmanPass[] = `stringArrayRemoveDuplicates $allConnection `;
+                for ($pass in $prmanPass){
+                    rmanSetAttr($pass,"rman__torattr___computeBehavior",$mode);        
+                    rmanSetAttr("rmanAreaShadowGlobals","rman__torattr___computeBehavior",$mode);
+                }
+            }
+            if (`getModifiers` == 4 ){
+                string $prmanPass[] = `stringArrayRemoveDuplicates $allConnection `;
+                for ($pass in $prmanPass){
+                    string $passConnect[] = `listConnections -sh 1 $pass `;
+                    for ($node in $passConnect){
+                        if (((`nodeType $node` == "RMSEnvLight")||(`nodeType $node` == "RMSGeoAreaLight"))&&(`getAttr ($pass + ".rman__torattr___computeBehavior")` == $mode)){
+                            select -add `listRelatives -p $node`;
+                        }
+                    }                    
+                }
+            }
+            $type = "upd";
+        } else {
+            string $slT[] = `ls -typ "RenderMan"`;
+            for ($pass in $slT){
+                if  
+                ((`attributeExists "rman__riopt__limits_deepshadowerror" $pass` == 1)
+                &&
+                (`attributeExists "rman__riopt__limits_deepshadowsimplifyerror" $pass` == 1)
+                && 
+                (`attributeExists "rman__riopt__Format_resolution" $pass` == 1)
+                &&
+                (`attributeExists "rman__torattr___computeBehavior" $pass` == 1))
+                {
+                    if (`getModifiers` == 0 ){
+                        rmanSetAttr($pass,"rman__torattr___computeBehavior",$mode);
+                    }
+                    if (`getModifiers ` == 4 ){
+                        string $passConnect[] = `listConnections -sh 1 $pass`;
+                        for ($node in $passConnect){
+                            if (((`nodeType $node` == "RMSEnvLight")||(`nodeType $node` == "RMSGeoAreaLight"))&&(`getAttr ($pass + ".rman__torattr___computeBehavior")` == $mode)){
+                                select -add `listRelatives -p $node`;
+                            }
+                        }                    
+                        
+                    }
+                }
+            }
+            $type = "upd";
+        }
+        $type = "upd";
+    }
+    if ($type == "sss"){
+        string $slT[] = `ls -typ "RenderMan"`;
+        for ($node in $slT){
+            if  
+            ((`attributeExists "rman__param__ptfilter_ior" $node` == 1)
+            &&
+            (`attributeExists "rman__param__ptfilter_maxsolidangle" $node` == 1)
+            &&
+            (`attributeExists "rman__param__ptfilter_followtopology" $node` == 1)
+            &&
+            (`attributeExists "rman__param__ptfilter_unitlength" $node` == 1)
+            &&
+            (`attributeExists "rman__torattr___computeBehavior" $node` == 1))
+            {
+                rmanSetAttr($node,"rman__torattr___computeBehavior",$mode);        
+            }
+            if  
+            ((`attributeExists "rman__torattr___passLayer" $node` == 1)
+            &&
+            (`attributeExists "rman__torattr___camera" $node` == 1)
+            &&
+            (`attributeExists "rman__torattr___crew" $node` == 1)
+            &&
+            (`attributeExists "rman__torattr___lightcrew" $node` == 1)
+            &&
+            (`attributeExists "rman__riattr___ShadingRate" $node` == 1)
+            &&
+            (`attributeExists "rman__torattr___computeBehavior" $node` == 1))
+            {
+                rmanSetAttr($node,"rman__torattr___computeBehavior",$mode);
+            }
+        }
+        $type = "upd";
+    }
+    if ($type == "upd"){
+        string $slT[] = `ls -typ "RenderMan"`;
+        button -e -nbg 0 switchShadowPass_On;
+        button -e -nbg 0 switchShadowPass_Off;
+        button -e -nbg 0 switchShadowPass;
+        for ($pass in $slT){
+            if  
+            (($pass != "rmanDeepShadowGlobals")
+            &&
+            ($pass != "rmanAreaShadowGlobals")
+            &&
+            (`attributeExists "rman__riopt__limits_deepshadowerror" $pass` == 1)
+            &&
+            (`attributeExists "rman__riopt__limits_deepshadowsimplifyerror" $pass` == 1)
+            && 
+            (`attributeExists "rman__riopt__Format_resolution" $pass` == 1)
+            &&
+            (`attributeExists "rman__torattr___computeBehavior" $pass` == 1))
+            {
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 1){
+                    button -e -ebg 0 -bgc 0.12 0.4 0.12 switchShadowPass_On;
+                }
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 0){
+                    button -e -ebg 0 -bgc 0.4 0.12 0.12 switchShadowPass_Off;
+                }
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 2){
+                    button -e -ebg 0 -bgc 0.4 0.4 0.12 switchShadowPass; 
+                }
+            }
+            if (`objExists rmanSSRenderGlobals`)
+            {
+                if (`getAttr "rmanSSRenderGlobals.rman__torattr___computeBehavior"` == 1){
+                    button -e -ebg 0 -bgc 0.12 0.4 0.12 switchSSS_On;
+                }
+                if (`getAttr "rmanSSRenderGlobals.rman__torattr___computeBehavior"` == 0){
+                    button -e -ebg 0 -bgc 0.4 0.12 0.12 switchSSS_Off;
+                }
+                if (`getAttr "rmanSSRenderGlobals.rman__torattr___computeBehavior"` == 2){
+                    button -e -ebg 0 -bgc 0.4 0.4 0.12 switchSSS_reuse;
+                }            
+            }
+        }
+    }
+}
+
+// swith trace for select light
+global proc switchTraceShadow( int $mode, int $selMode ){
+    string $sel[] =  `ls -sl`;
+    string $all_light[] = `ls -typ RMSGeoAreaLight -typ RMSEnvLight`;
+    string $sel_light[] = `listRelatives -ad -typ RMSGeoAreaLight -typ RMSEnvLight $sel `;
+    string $result[] = {};
+    if ( $selMode != 2 ){
+        if (`getModifiers` == 4 ){
+            $selMode = 1;
+        }
+    }
+    if ( $selMode == 0){
+        if (`size $sel_light ` > 0){
+            for ($node in $sel_light){
+                if ( $mode == 0){
+                    setAttr ($node + ".traceShadows") 0;   
+                }
+                if ( $mode == 1){
+                    setAttr ($node + ".traceShadows") 1;
+                }
+                if ( $mode == 2){
+                    if (`getAttr ($node + ".traceShadows")` == 0) {
+                        setAttr ($node + ".traceShadows") 1;   
+                    } else {
+                        setAttr ($node + ".traceShadows") 0; 		    
+                    }
+                }
+            }
+        }
+        if (`size $sel_light` == 0) {
+            for ($node in $all_light){
+                if ( $mode == 0){
+                    setAttr ($node + ".traceShadows") 0;   
+                }
+                if ( $mode == 1){
+                    setAttr ($node + ".traceShadows") 1;
+                }
+                if ( $mode == 2){
+                    if (`getAttr ($node + ".traceShadows")` == 0) {
+                        setAttr ($node + ".traceShadows") 1;   
+                    } else {
+                        setAttr ($node + ".traceShadows") 0; 		    
+                    }
+                }
+            }
+        }
+        for ($node in $all_light){
+            if (`getAttr ($node + ".traceShadows")` == 0) {
+                $result[0] = "0";
+            } else {
+                $result[1] = "1";
+            }
+        }
+        if ( $result[0] == 0 ) { button -e -ebg 0 -bgc 0.4 0.12 0.12 switchTraceShadow_Off; } else { button -e -nbg 0 switchTraceShadow_Off; }
+        if ( $result[1] == 1 ) { button -e -ebg 0 -bgc 0.12 0.4 0.12 switchTraceShadow_On; } else { button -e -nbg 0 switchTraceShadow_On; }
+        select $sel;
+    }
+    if ( $selMode == 1){
+        select -cl;
+         for ($node in $all_light){
+                if (($mode == 0)&&(`getAttr ($node + ".traceShadows")` == 0)){
+                    select -add `listRelatives -p $node`;   
+                }
+                if (( $mode == 1)&&(`getAttr ($node + ".traceShadows")` == 1)){
+                    select -add `listRelatives -p $node`;
+                }
+                if ( $mode == 2){
+                    if (`getAttr ($node + ".traceShadows")` == 0) {
+                        select -add `listRelatives -p $node`;   
+                    } else {
+                        select -add `listRelatives -p $node`;	    
+                    }
+                }
+            }
+        for ($node in $all_light){
+            if (`getAttr ($node + ".traceShadows")` == 0) {
+                $result[0] = "0";
+            } else {
+                $result[1] = "1";
+            }
+        }
+        if ( $result[0] == 0 ) { button -e -ebg 0 -bgc 0.4 0.12 0.12 switchTraceShadow_Off; } else { button -e -nbg 0 switchTraceShadow_Off; }
+        if ( $result[1] == 1 ) { button -e -ebg 0 -bgc 0.12 0.4 0.12 switchTraceShadow_On; } else { button -e -nbg 0 switchTraceShadow_On; }        
+    }
+    if ( $selMode == 2){
+        select -cl;
+        for ($node in $all_light){
+            if (`getAttr ($node + ".traceShadows")` == 0) {
+                $result[0] = "0";
+            } else {
+                $result[1] = "1";
+            }
+        }
+        if ( $result[0] == 0 ) { button -e -ebg 0 -bgc 0.4 0.12 0.12 switchTraceShadow_Off; } else { button -e -nbg 0 switchTraceShadow_Off; }
+        if ( $result[1] == 1 ) { button -e -ebg 0 -bgc 0.12 0.4 0.12 switchTraceShadow_On; } else { button -e -nbg 0 switchTraceShadow_On; }
+        select $sel;
+    }
+}
+
+// convert text file to string array
+global proc string[] textFileToStringArray ( string $filePatch){
+	$fileId = `fopen $filePatch "r"`;
+	string $dataArray[];
+	string $nextLine = `fgetline $fileId`;
+	while (size($nextLine) > 0){
+		$dataArray[size($dataArray)] = $nextLine;
+		$nextLine = `fgetline $fileId`;
+	}
+	fclose $fileId;
+	return $dataArray;
+}

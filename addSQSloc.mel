@@ -1,0 +1,393 @@
+// *************************************************************
+// add Shave Quality Slider (SQS) on transform.
+// select transform what contains shave node and run mel addSQS
+// *************************************************************
+
+global proc addSQSlocUI(){
+	//If Maya's version is greater than or equal to 2011 go ahead
+	if (`window -ex characterRenderControl`){
+		deleteUI -window characterRenderControl;}
+	if (getApplicationVersionAsFloat() >= 2011){
+		//set the scripts directory so we can load our ui file
+		string $scriptsDirectory = `internalVar -usd`;
+		//load the ui file
+		string $addSQSWindow = `loadUI -uiFile ($scriptsDirectory+"/addSQSloc.ui")`;
+		//show the window
+		showWindow $addSQSWindow;
+		//find all objects in the scene and load their mesh transform name
+		menuItem -e -c "showHelp -absolute \"http://192.168.0.7/wiki/index.php/%D0%9E%D1%82%D0%B4%D0%B5%D0%BB_%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F\"" actionHelp;
+		intField -cc "setSQSAttr ShaveQuality guiInt" -p "MayaWindow|characterRenderControl|verticalLayout|horizontalLayout_8|shaveControlTab|verticalLayout_3|Layout_Q|shaveQInt_lay" -min -10 -max 10 -v 0 ShaveQualityInt;
+		intField -cc "setSQSAttr Thickness guiInt" -p "MayaWindow|characterRenderControl|verticalLayout|horizontalLayout_8|shaveControlTab|verticalLayout_3|Layout_T|shaveTInt_lay" -min -10 -max 10 -v 0 ThicknessInt;
+		updateSQSObjectsInScene;
+	} else {
+		//You aren't using Maya 2011 if this pops up. The upgrade is worth it! :)
+		print "You're using a version of Maya that is incompatible with this script.\n";
+	}
+	updateSQSObjectsInScene;
+}
+
+global proc selListSQSAction(){
+		int $selIndex[] = `textScrollList -q -sii objectScrollList`;
+		textScrollList -e -da objectScrollListLong;
+		for ($i=0; $i<`size $selIndex`; ++$i){
+			textScrollList -e -sii $selIndex[$i] objectScrollListLong;
+			if ( `checkBox -q -v syncSelectCheckBox` ) {
+				select `textScrollList -q -si objectScrollListLong`;
+			}
+		}
+		if( `textScrollList -q -nsi objectScrollListLong` == 1 ){
+			string $curSel[] = `textScrollList -q -si objectScrollListLong`;
+			if ( `attributeExists "ShaveQuality" $curSel[0]`&&`attributeExists "Thickness" $curSel[0]`&&`attributeExists "affectSegmet" $curSel[0]` ) {
+				int $valueSQ = `getAttr ( $curSel[0] + ".ShaveQuality" )`;
+				int $valueThc = `getAttr ( $curSel[0] + ".Thickness" )`;
+				int $valueAffectSeg = `getAttr ( $curSel[0] + ".affectSegmet" )`;
+				intSlider -e -v ( $valueSQ - 10 ) ShaveQuality;
+				intSlider -e -v ( $valueThc - 10 ) Thickness;
+				checkBox -e -v $valueAffectSeg affectSegmet;			
+			}
+			
+		}
+	}
+global proc sliderSQSAction( string $slider ){
+		int $valueSlider = ( `intSlider -q -v $slider` );
+	}
+
+global proc affectSQSSegmet(){
+	string $curSel[] = `textScrollList -q -si objectScrollListLong`;
+	for ($tr in $curSel)
+	if ( `checkBox -q -v affectSegmet` ) {
+		setAttr -e ( $tr + ".affectSegmet" ) 1;
+	} else {
+		setAttr -e ( $tr + ".affectSegmet" ) 0;
+	}
+}	
+
+global proc setSQSAttr(string $attrName, string $triger){
+	int $qualityValue = ( `intSlider -q -v $attrName` + 10 );
+	string $sel[] = `textScrollList -q -si objectScrollListLong`;
+	int $z = `size $sel`;
+	if ($triger == "set") {
+		for ($i=0; $i<$z; $i++){
+			if ( $qualityValue != 0){
+				intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) $qualityValue;
+			} else {
+				intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) 1;
+			}		
+		}
+	}
+	if ($triger == "gui") intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+	if ($triger == "guiInt") {
+		int $v = `intField -q -v ( $attrName + "Int")`;
+		intSlider -e -v $v $attrName;
+	}
+}
+
+global proc string[] updateSQSObjectsInScene(){
+	string $listSQSObject[];
+	string $selListLong[] = `textScrollList -q -si objectScrollListLong`;
+	string $selList[] = `textScrollList -q -si objectScrollList`;
+	// int $selIndex[] = `textScrollList -q -sii objectScrollList`; // select by index
+	string $listObjectsLong[] = `ls -l -tr`;
+	string $listObjects[] = `ls -tr`;
+	textScrollList -e -ra objectScrollList;
+	textScrollList -e -ra objectScrollListLong;
+	int $z = `size $listObjectsLong `;
+	for ($i=0; $i<$z; ++$i){
+		if ((`attributeQuery -n $listObjectsLong[$i] -ex SQS_Status`) || (`attributeQuery -n $listObjectsLong[$i] -ex SQSon`) || (`attributeQuery -n $listObjectsLong[$i] -ex On`) ) {
+			textScrollList -e -ap $i $listObjects[$i] objectScrollList;
+			textScrollList -e -ap $i $listObjectsLong[$i] objectScrollListLong;
+			$listSQSObject[$i] = $listObjectsLong[$i];
+		}
+	}
+	for ($n in $selList){
+		catchQuiet ( `textScrollList -e -si $n objectScrollList` );		
+	}
+	for ($n in $selListLong){
+		catchQuiet ( `textScrollList -e -si $n objectScrollListLong` );		
+	}
+return $listSQSObject;
+}
+
+global proc string[] selectSQSObject(){
+	int $selIndex[] = `textScrollList -q -sii objectScrollList`;
+	int $z = `size $selIndex`;
+	textScrollList -e -da objectScrollListLong;
+	for ($i=0; $i<$z; ++$i){
+		textScrollList -e -sii $selIndex[$i] objectScrollListLong;
+	}
+	string $selList[] = `textScrollList -q -si objectScrollListLong`;
+	select -cl -all;
+	for ($i=0; $i<$z; ++$i){
+		select -add $selList[$i];
+	}
+	return $selList;
+}
+
+global proc removeSQSloc(){
+	string $selTrList[] = `textScrollList -q -si objectScrollListLong`;
+	int $selTrListSize = `size $selTrList`;
+	string $selTrListShortNames[] = `ls -os -tr`;
+	string $expNodeName[]; 		// names of expression node for each selTrList
+	for ( $i=0; $i<$selTrListSize; ++$i ){ 
+		string $nameTr = `substituteAllString $selTrListShortNames[$i] ":" "_"`;
+		string $nameExpr = ( "exprSQS" + "_" + $nameTr );
+		stringArrayInsertAtIndex ($i, $expNodeName, $nameExpr );
+	}
+	
+	if ( `objExists expressionShaveSlider`){
+		returnSQSData expressionShaveSlider;
+		delete expressionShaveSlider;
+	}
+	
+	for ($exprSQS in $expNodeName){
+		if (`objExists $exprSQS`) {
+			if (`attributeExists "shaveQualityData" $exprSQS`){
+				returnSQSData $exprSQS;
+			}
+			delete $exprSQS;
+		}	
+	}
+	for ($tr in $selTrList) {
+		if (`attributeExists "ShaveQuality" $tr`){
+			deleteAttr ($tr + ".ShaveQuality");
+			deleteAttr ($tr + ".Thickness");
+		}
+		if (`attributeExists "SQS_Status" $tr`) {
+			deleteAttr ($tr + ".SQS_Status");
+		}
+	}
+	updateSQSObjectsInScene;
+}
+
+
+global proc addSQSloc(){
+// declare variables
+	int $n = 0;
+	string $selTrList[] = `ls -os -l -tr`;
+	int $selTrListSize = `size $selTrList`;
+	string $selTrListShortNames[] = `ls -os -tr`;
+	string $expNodeName[]; 		// names of expression node for each selTrList
+	string $exprData[]; 		// sahve attributes data for each selTrList
+	string $exprArrayBind[];	// expression after dynamic binding ( one for each index selTrList )
+	string $expr[]; 			// expression after dynamic binding
+	string $exprDataTr;
+	for ( $i=0; $i<$selTrListSize; ++$i ){ 
+		string $nameTr = `substituteAllString $selTrListShortNames[$i] ":" "_"`;
+		string $nameExpr = ( "exprSQS" + "_" + $nameTr );
+		stringArrayInsertAtIndex ($i, $expNodeName, $nameExpr );
+	}
+
+// check the SQS expression and shaveQualityData attributes that they exist. 
+// if exist, restore attributes data from shaveQualityData, remake SQS expression. 
+// ele create SQS expression amd attributes.
+	
+	if ( `objExists expressionShaveSlider`){
+		returnSQSData expressionShaveSlider;
+		delete expressionShaveSlider;
+	}
+		
+	for ($exprSQS in $expNodeName){
+		
+		if (`objExists $exprSQS`) {
+			if (`attributeExists "shaveQualityData" $exprSQS`){
+			returnSQSData $exprSQS;
+			}
+			delete $exprSQS;
+			expression -n $exprSQS;
+		} else {
+			expression -n $exprSQS;
+			addAttr -ln "shaveQualityData"  -dt "string" $exprSQS; 
+		}
+	}
+
+// collect attributes data in exprData 	
+	for ( $i=0; $i<$selTrListSize; ++$i ){
+		string $exprDataTr = `collectSQSData $selTrList[$i]`;
+		stringArrayInsertAtIndex( $i, $exprData, $exprDataTr );
+	}
+	
+// read expression from file and make binding variables	
+	
+	string $userScriptDir = `internalVar -usd`;
+	string $exprArray[] = `textFileToStringArray (  $userScriptDir + "addSQS_expression.mel" )`;
+	$exprArrayBind = $exprArray;
+	int $exprArraySize = `size $exprArray `;
+	for ($t=0; $t<$selTrListSize; ++$t){
+		for ($i=0; $i<$exprArraySize; ++$i){
+			string $matchRoot = `match "$$nodeName" $exprArray[$i]`;
+			string $matchExpr = `match "$$exprName" $exprArray[$i]`;
+			if ( $matchRoot == "$$nodeName" ){
+				string $newString = `substituteAllString $exprArray[$i] "$$nodeName" $selTrListShortNames[$t]`;
+				$exprArrayBind[$i] = $newString;
+			}
+			if ($matchExpr == "$$exprName"){
+				string $newString = `substituteAllString $exprArray[$i] "$$exprName" $expNodeName[$t]`;					
+				$exprArrayBind[$i] = $newString;
+			}
+		}
+		string $exprTr = stringArrayToString ( $exprArrayBind, "" );
+		$expr[$t] = $exprTr;
+	}
+		
+		
+	
+//	checking and adding needed attributes 
+
+	for ($tr in $selTrList) {
+		if (`attributeExists "ShaveQuality" $tr`){
+			deleteAttr ($tr + ".ShaveQuality");
+			deleteAttr ($tr + ".Thickness");
+			addAttr -ln "ShaveQuality" -at long -min 1 -max 20 -dv 10 $tr;
+			addAttr -ln "Thickness" -at long -min 1 -max 20 -dv 10 $tr;
+			setAttr -e -keyable true -channelBox true ( $tr + ".ShaveQuality" );
+			setAttr -e -keyable true -channelBox true ( $tr + ".Thickness" );
+		} else {
+			addAttr -ln "ShaveQuality" -at long -min 1 -max 20 -dv 10 $tr;
+			addAttr -ln "Thickness" -at long -min 1 -max 20 -dv 10 $tr;
+			setAttr -e -keyable true -channelBox true ( $tr + ".ShaveQuality" );
+			setAttr -e -keyable true -channelBox true ( $tr + ".Thickness" );
+		}
+		if (`attributeExists "SQS_Status" $tr`) {
+			deleteAttr ($tr + ".SQS_Status");
+			addAttr -ln "SQS_Status" -at bool $tr;
+		} else {
+			addAttr -ln "SQS_Status" -at bool $tr;			
+		}
+		if (`attributeExists "affectSegmet" $tr`) {
+			deleteAttr ($tr + ".affectSegmet");
+			addAttr -ln "affectSegmet" -at bool $tr;
+		} else {
+			addAttr -ln "affectSegmet" -at bool $tr;			
+		}
+	}
+	for ($i=0; $i<$selTrListSize; $i++){
+		if (`attributeExists "shaveQualityData" $expNodeName[$i] `){
+			setAttr -typ "string" ( $expNodeName[$i] + ".shaveQualityData" ) $exprData[$i];
+			expression -e -s $expr[$i] -o "" -ae 0 -uc all $expNodeName[$i];
+		} else {
+			addAttr -ln "shaveQualityData"  -dt "string" $expNodeName[$i];
+			setAttr -typ "string" ( $expNodeName[$i] + ".shaveQualityData"  ) $exprData[$i];
+			expression -e -s $expr[$i] -o "" -ae 0 -uc all $expNodeName[$i];
+		}
+	}
+	updateSQSObjectsInScene;
+}
+
+// collect shave attribute data
+global proc string collectSQSData ( string $selTr ){
+	string $shaveShapeList[] = `listRelatives -ad -typ shaveHair $selTr`;
+	
+	string $hairCountName[];
+	string $hairSegmentsName[];
+	string $rootThicknessName[];
+	string $tipThicknessName[];
+	string $randScaleName[];
+	
+	string $hairCountValue[];
+	string $hairSegmentsValue[];
+	string $rootThicknessValue[];
+	string $tipThicknessValue[];
+	string $randScaleValue[];
+	
+	int $z = `size $shaveShapeList`;
+	for ( $i = 0; $i < $z; $i++ ) {
+
+		$hc_n = ( $shaveShapeList[$i] + ".hairCount" );
+		$hs_n = ( $shaveShapeList[$i] + ".hairSegments" );
+		$rt_n = ( $shaveShapeList[$i] + ".rootThickness" );
+		$tt_n = ( $shaveShapeList[$i] + ".tipThickness" );    
+		$rs_n = ( $shaveShapeList[$i] + ".randScale" ); 
+					
+		$hairCountName[$i] = $hc_n;
+		$hairSegmentsName[$i] = $hs_n;
+		$rootThicknessName[$i] = $rt_n;
+		$tipThicknessName[$i] = $tt_n;
+		$randScaleName[$i] = $rs_n;
+					
+		$hc_v = `getAttr $hc_n `;
+		$hs_v = `getAttr $hs_n `;
+		$rt_v = `getAttr $rt_n `;
+		$tt_v = `getAttr $tt_n `;
+		$rs_v = `getAttr $rs_n `; 
+
+		$hairCountValue[$i] = $hc_v;
+		$hairSegmentsValue[$i] = $hs_v;
+		$rootThicknessValue[$i] = $rt_v;
+		$tipThicknessValue[$i] = $tt_v;
+		$randScaleValue[$i] = $rs_v;
+		
+	}
+	
+	string $hairCountName_D = stringArrayToString ( $hairCountName, "&" );
+	string $hairSegmentsName_D = stringArrayToString ( $hairSegmentsName, "&" );
+	string $rootThicknessName_D = stringArrayToString ( $rootThicknessName, "&" );
+	string $tipThicknessName_D = stringArrayToString ( $tipThicknessName, "&" );
+	string $randScaleName_D = stringArrayToString ( $randScaleName, "&" );
+	
+	string $hairCountValue_D = stringArrayToString ( $hairCountValue, "&" );
+	string $hairSegmentsValue_D = stringArrayToString ( $hairSegmentsValue, "&" );
+	string $rootThicknessValue_D = stringArrayToString ( $rootThicknessValue, "&" );
+	string $tipThicknessValue_D = stringArrayToString ( $tipThicknessValue, "&" );
+	string $randScaleValue_D = stringArrayToString ( $randScaleValue, "&" );
+	
+	
+	string $exprDataAN = "%" + $hairCountName_D + "%" + $hairSegmentsName_D + "%" + $rootThicknessName_D + "%" + $tipThicknessName_D + "%" + $randScaleName_D;
+	string $exprDataAV = "%" + $hairCountValue_D + "%" + $hairSegmentsValue_D + "%" + $rootThicknessValue_D + "%" + $tipThicknessValue_D + "%" + $randScaleValue_D;
+	$exprDataTr = "$" + $exprDataAN + "$" + $exprDataAV;		
+	return $exprDataTr;
+}
+
+// return data from old expression and restore default attributes value
+global proc returnSQSData ( string $exprNode ) {
+	string $shaveQualityData = `getAttr ( $exprNode + ".shaveQualityData" )`;
+
+	string $data[] = stringToStringArray ($shaveQualityData, "$" );
+	string $data_AN = $data[0];
+	string $data_AV = $data[1];
+	string $data_ANa[] = stringToStringArray ($data_AN, "%" );
+	string $data_AVa[] = stringToStringArray ($data_AV, "%" );
+
+	string $hc_n[] = stringToStringArray ($data_ANa[0], "&" );
+	string $hs_n[] = stringToStringArray ($data_ANa[1], "&" );
+	string $rt_n[] = stringToStringArray ($data_ANa[2], "&" );
+	string $tt_n[] = stringToStringArray ($data_ANa[3], "&" );
+	string $rs_n[] = stringToStringArray ($data_ANa[4], "&" );
+
+	string $hc_v[]  = stringToStringArray ($data_AVa[0], "&" );
+	string $hs_v[]  = stringToStringArray ($data_AVa[1], "&" );
+	string $rt_v[]  = stringToStringArray ($data_AVa[2], "&" );
+	string $tt_v[]  = stringToStringArray ($data_AVa[3], "&" );
+	string $rs_v[]  = stringToStringArray ($data_AVa[4], "&" );
+
+	int $z = `size $hc_n`;
+
+	for ( $p=0; $p<$z; ++$p ){
+			
+		float $hc_v_cur = $hc_v[$p];
+		int   $hs_v_cur = $hs_v[$p];
+		float $rt_v_cur = $rt_v[$p];
+		float $tt_v_cur = $tt_v[$p];
+		float $rs_v_cur = $rs_v[$p];
+		
+		setAttr $hc_n[$p] $hc_v_cur;
+		setAttr $hs_n[$p] $hs_v_cur;
+		setAttr $rt_n[$p] $rt_v_cur;
+		setAttr $tt_n[$p] $tt_v_cur;
+		setAttr $rs_n[$p] $rs_v_cur;
+	}
+}
+
+// convert text file to string array
+global proc string[] textFileToStringArray ( string $filePatch){
+	$fileId = `fopen $filePatch "r"`;
+	string $dataArray[];
+	string $nextLine = `fgetline $fileId`;
+	while (size($nextLine) > 0){
+		$dataArray[size($dataArray)] = $nextLine;
+		$nextLine = `fgetline $fileId`;
+	}
+	fclose $fileId;
+	return $dataArray;
+}

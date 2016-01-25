@@ -1,0 +1,7 @@
+
+<RCC>
+  <qresource>
+    <file>pivotReplacerUI/pivotReplacer_img.png</file>
+    <file>pivotReplacerUI/pivotReplacer_img.bmp</file>
+  </qresource>
+</RCC>

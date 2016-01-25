@@ -1,0 +1,10 @@
+	global proc string[] textFileToStringArray ( string $filePatch){
+		$fileId = `fopen $filePatch "r"`;
+		string $dataArray[];
+		string $nextLine = `fgetline $fileId`;
+		while (size($nextLine) > 0){
+			$dataArray[size($dataArray)] = $nextLine;
+			$nextLine = `fgetline $fileId`;
+		}
+		return $dataArray;
+	}

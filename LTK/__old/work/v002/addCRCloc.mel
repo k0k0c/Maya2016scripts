@@ -1,0 +1,573 @@
+// *************************************************************
+// add Shave Quality Slider (CRC) on transform.
+// select transform what contains shave node and run mel addCRC
+// *************************************************************
+global proc addCRClocUI(){
+    if (`window -ex LighterTools`){
+		deleteUI -window LighterTools;
+    }
+    if (`window -ex MovePivotWindow`){
+        deleteUI -window MovePivotWindow;
+    }
+	if (getApplicationVersionAsFloat() >= 2011){
+		string $scriptsDirectory = "//SERVER-3D/Project/lib/setup/maya/maya_scripts_rfm4/LGT/";
+		string $addCRCWindow = `loadUI -uiFile ($scriptsDirectory+"addCRCloc.ui")`;
+        showWindow $addCRCWindow;
+        window -e -te 300 -le 600 LighterTools;
+		menuItem -e -c "showHelp -absolute \"http://192.168.0.7/wiki/index.php/%D0%9E%D1%82%D0%B4%D0%B5%D0%BB_%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F\"" actionHelp;
+        switchTraceShadow 0 2;
+        prmanPassComputeControl 0 upd;
+        intField -cc "setCRCAttr ShaveQuality guiInt" -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_4|horizontalLayout_8|shaveControlTab|verticalLayout_3|Layout_Q|shaveQInt_lay" -min -10 -max 10 -v 0 ShaveQualityInt;
+		intField -cc "setCRCAttr Thickness guiInt" -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_4|horizontalLayout_8|shaveControlTab|verticalLayout_3|Layout_T|shaveTInt_lay" -min -10 -max 10 -v 0 ThicknessInt;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_5|fixRotateIntLay" fixRotateIntField_X;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_5|fixRotateIntLay" fixRotateIntField_Y;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_5|fixRotateIntLay" fixRotateIntField_Z;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_11|fixTranslateLay" fixTranslateIntField_X;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_11|fixTranslateLay" fixTranslateIntField_Y;
+        floatField -p "MayaWindow|LighterTools|verticalLayout|tabWidget_2|verticalLayout_7|verticalLayout_8|horizontalLayout_11|fixTranslateLay" fixTranslateIntField_Z;
+	} else {
+		print "You're using a version of Maya that is incompatible with this script.\n";
+	}
+    if (`window -ex LighterTools`){
+        updateCRCObjectsInScene;
+        updateLGTuiAction;
+    }
+}
+
+// upfate UI on events
+global proc updateLGTuiEvents(){
+    global int $updJobID[];
+    int $updJobIDcur;
+    global string $allLight[];
+    global string $allRMnode[];    
+    int $z = `size $updJobID`;
+    for ($i = 0; $i < $z; ++$i) {
+        if((`scriptJob -exists $updJobID[$i]` == 1)&&($updJobID[$i] != 0)) {
+            evalDeferred ("scriptJob -k " + $updJobID[$i]);
+        }
+    }
+    $updJobID = {};
+    $allLight = `ls -typ RMSGeoAreaLight -typ RMSEnvLight`;
+    $allRMnode = `ls -typ "RenderMan"`;
+    string $listEvents[] = {
+        "DagObjectCreated",
+        "SceneOpened",
+        "Undo",
+        "Redo"
+    };
+    int $allLightCount = `size $allLight`;
+    int $allRMnodeCount = `size $allRMnode `;
+    int $eventsCount = `size $listEvents`;
+    $z = $allLightCount + $eventsCount + $allRMnodeCount;
+    for ($i = 0; $i < $z; ++$i) {
+        if ( $i < $allLightCount ){
+            $updJobIDcur = `eval ( "scriptJob -ac " + $allLight[$i] + ".traceShadows" + " updateLGTuiAction" )`;
+            intArrayInsertAtIndex ( 0, $updJobID, $updJobIDcur );
+        }
+        if (( $i >= $allLightCount)&&($i < ( $allLightCount + $eventsCount ))){
+            $updJobIDcur = `eval ( "scriptJob -e " + $listEvents[$i - $allLightCount] + " updateLGTuiAction" )`;
+            intArrayInsertAtIndex ( 0, $updJobID, $updJobIDcur );
+        }
+        if (( $i >= ( $allLightCount + $eventsCount ))&&(`attributeExists "rman__torattr___computeBehavior" $allRMnode[$i - $eventsCount - $allLightCount]`)&&(`attributeExists "rman__torattr___phase" $allRMnode[$i - $eventsCount - $allLightCount]`)){
+            $updJobIDcur = `eval ( "scriptJob -ac " + $allRMnode[$i - $eventsCount - $allLightCount] + ".rman__torattr___computeBehavior" + " updateLGTuiAction" )`;
+            intArrayInsertAtIndex ( 0, $updJobID, $updJobIDcur );
+            $updJobIDcur = `eval ( "scriptJob -ac " + $allRMnode[$i - $eventsCount - $allLightCount] + ".rman__torattr___phase" + " updateLGTuiAction" )`;
+            intArrayInsertAtIndex ( 0, $updJobID, $updJobIDcur );
+        }
+    }    
+}
+
+// update UI action
+global proc updateLGTuiAction(){
+    if (`window -ex LighterTools`){
+        string $all_light[] = `ls -typ RMSGeoAreaLight -typ RMSEnvLight`;
+        string $result[] = {};
+        string $pasOutLight[]={};
+        for ($node in $all_light){
+            if (`getAttr ($node + ".traceShadows")` == 0) {
+                $result[0] = "0";
+            } else {
+                $result[1] = "1";
+            }
+        }
+        if ( $result[0] == 0 ) { button -e -ebg 0 -bgc 0.49 0.12 0.12 switchTraceShadow_Off; } else { button -e -nbg 0 switchTraceShadow_Off; }
+        if ( $result[1] == 1 ) { button -e -ebg 0 -bgc 0.12 0.49 0.12 switchTraceShadow_On; } else { button -e -nbg 0 switchTraceShadow_On; }
+        
+        string $slT[] = `ls -typ "RenderMan"`;
+        button -e -nbg 0 switchShadowPass_On;
+        button -e -nbg 0 switchShadowPass_Off;
+        button -e -nbg 0 switchShadowPass;
+        button -e -nbg 0 switchSSS_On;
+        button -e -nbg 0 switchSSS_Off;
+        button -e -nbg 0 switchSSS_reuse;
+        layout -e -nbg 1 "shadowPassControlLay";
+        for ($pass in $slT){
+            if  
+            (($pass != "rmanDeepShadowGlobals")
+            &&
+            ($pass != "rmanAreaShadowGlobals")            
+            &&            
+            (`attributeExists "rman__riopt__limits_deepshadowerror" $pass` == 1)
+            &&
+            (`attributeExists "rman__riopt__limits_deepshadowsimplifyerror" $pass` == 1)
+            && 
+            (`attributeExists "rman__riopt__Format_resolution" $pass` == 1)
+            &&
+            (`attributeExists "rman__torattr___computeBehavior" $pass` == 1))
+            {
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 1){
+                    button -e -ebg 0 -bgc 0.12 0.49 0.12 switchShadowPass_On;
+                }
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 0){
+                    button -e -ebg 0 -bgc 0.49 0.12 0.12 switchShadowPass_Off;
+                }
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 2){
+                    button -e -ebg 0 -bgc 0.49 0.49 0.12 switchShadowPass; 
+                }
+                if (`getAttr ($pass + ".rman__torattr___phase")` == "/Job/Preflight/Maps/Shadow"){
+                    button -e -ebg 0 -bgc 0.12 0.49 0.12 switchShadowPass; 
+                }
+                
+                // alert non connection pass
+                string $passConnect[] = `listConnections -sh 1 $pass`;
+                for ($n=0; $n<`size $passConnect`; ++$n) {
+                    if ((`nodeType $passConnect[$n]` == "RMSEnvLight")||(`nodeType $passConnect[$n]` == "RMSGeoAreaLight")){
+                        stringArrayInsertAtIndex ( 0, $pasOutLight, $passConnect[$n] );
+                    }
+                }
+                if ( `stringArrayToString $pasOutLight ""` == "" ){
+                    layout -e -bgc 0.49 0.12 0.12 "shadowPassControlLay";
+                    warning ( "Not one light is not connected to " + $pass );
+                }
+            }
+            if
+            (($pass == "rmanSSDiffuseGlobals")
+            ||($pass == "rmanSSRenderGlobals")
+            ||($pass == "rmanSSDiffusePass")
+            ||($pass == "rmanSSRenderPass"))
+            {
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 1){
+                    button -e -ebg 0 -bgc 0.12 0.49 0.12 switchSSS_On;
+                }
+                if (`getAttr ($pass + ".rman__torattr___computeBehavior")` == 0){
+                    button -e -ebg 0 -bgc 0.49 0.12 0.12 switchSSS_Off;
+                }
+                if ((`getAttr ($pass + ".rman__torattr___computeBehavior")` == 2)&&(`getAttr ($pass + ".rman__torattr___phase")` == "/Job/Preflight/Maps/Subsurface")){
+                    button -e -ebg 0 -bgc 0.49 0.49 0.12 switchSSS_reuse;
+                }
+                if ((`getAttr ($pass + ".rman__torattr___computeBehavior")` == 2)&&(`getAttr ($pass + ".rman__torattr___phase")` == "/Job/Frames/Maps/Subsurface")){
+                    button -e -nbg 0 switchSSS_reuse;
+                    button -e -ebg 0 -bgc 0.12 0.49 0.12 switchSSS_reuse;
+                }
+            }
+        }
+    }
+    updateLGTuiEvents;
+}
+
+// move pivots UI
+global proc movePivotsUI(){
+	if (`window -ex MovePivotWindow`){
+		deleteUI -window MovePivotWindow;}
+	if (getApplicationVersionAsFloat() >= 2011){
+		string $scriptsDirectory = "//SERVER-3D/Project/lib/setup/maya/maya_scripts_rfm4/LGT/";
+		string $MovePivotWindow = `loadUI -uiFile ($scriptsDirectory+"pivotReplacer.ui")`;
+		showWindow $MovePivotWindow;
+        window -e -te 410 -le 990 MovePivotWindow;
+        if (`manipMoveContext -q -mode Move` == 0) { 
+            checkBox -e -v 0 worldModePivotCheckBox;
+            checkBox -e -v 1 localModePivotCheckBox;            
+        }
+        if (`manipMoveContext -q -mode Move` == 2) { 
+            checkBox -e -v 1 worldModePivotCheckBox;
+            checkBox -e -v 0 localModePivotCheckBox;            
+        }
+    } else {
+		print "You're using a version of Maya that is incompatible with this script.\n";
+	}
+}
+
+global proc selListCRCAction(){
+		int $selIndex[] = `textScrollList -q -sii objectScrollList`;
+		textScrollList -e -da objectScrollListLong;
+		for ($i=0; $i<`size $selIndex`; ++$i){
+			textScrollList -e -sii $selIndex[$i] objectScrollListLong;
+			if ( `checkBox -q -v syncSelectCheckBox` ) {
+				select `textScrollList -q -si objectScrollListLong`;
+			}
+		}
+		if( `textScrollList -q -nsi objectScrollListLong` == 1 ){
+			string $curSel[] = `textScrollList -q -si objectScrollListLong`;
+			if ( `attributeExists "ShaveQuality" $curSel[0]`&&`attributeExists "Thickness" $curSel[0]`&&`attributeExists "affectSegmet" $curSel[0]` ) {
+				int $valueSQ = `getAttr ( $curSel[0] + ".ShaveQuality" )`;
+				int $valueThc = `getAttr ( $curSel[0] + ".Thickness" )`;
+				int $valueAffectSeg = `getAttr ( $curSel[0] + ".affectSegmet" )`;
+				intSlider -e -v ( $valueSQ - 10 ) ShaveQuality;
+				intSlider -e -v ( $valueThc - 10 ) Thickness;
+				checkBox -e -v $valueAffectSeg affectSegmet;			
+			}
+			
+		}
+	}
+
+global proc sliderCRCAction( string $slider ){
+    int $valueSlider = ( `intSlider -q -v $slider` );
+}
+
+global proc affectCRCSegmet(){
+	string $curSel[] = `textScrollList -q -si objectScrollListLong`;
+	for ($tr in $curSel)
+	if ( `checkBox -q -v affectSegmet` ) {
+		setAttr -e ( $tr + ".affectSegmet" ) 1;
+	} else {
+		setAttr -e ( $tr + ".affectSegmet" ) 0;
+	}
+}	
+
+global proc setCRCAttr(string $attrName, string $triger){
+	int $qualityValue = ( `intSlider -q -v $attrName` + 10 );
+	string $sel[] = `textScrollList -q -si objectScrollListLong`;
+	int $z = `size $sel`;
+	if ($triger == "set") {
+		for ($i=0; $i<$z; $i++){
+			if ( $qualityValue != 0){
+				intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) $qualityValue;
+			} else {
+				intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) 1;
+			}		
+		}
+	}
+	if ($triger == "gui") intField -e -v ($qualityValue - 10) ( $attrName + "Int");
+	if ($triger == "guiInt") {
+		int $qualityValue = `intField -q -v ( $attrName + "Int")` +10;
+		intSlider -e -v ( $qualityValue - 10 ) $attrName;
+		for ($i=0; $i<$z; $i++){
+			if ( $qualityValue != 0){
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) $qualityValue;
+			} else {
+				setAttr -ca 1 ( $sel[$i] + "." + $attrName ) 1;
+			}		
+		}
+	}
+    updateCRCObjectsInScene;
+}
+
+global proc string[] updateCRCObjectsInScene(){
+	string $connectionExprTr[] = {};
+    string $listCRCObject[];
+	string $selListLong[] = `textScrollList -q -si objectScrollListLong`;
+	string $selList[] = `textScrollList -q -si objectScrollList`;
+	// int $selIndex[] = `textScrollList -q -sii objectScrollList`; // select by index
+	string $listObjectsLong[] = `ls -l -tr`;
+	string $listObjects[] = `ls -tr`;
+    
+    string $listExpression[] = `ls -l -typ "expression"`;
+    for ($node in $listExpression){
+        string $matchExpr = `match "exprCRC" $node`;
+		if ( $matchExpr == "exprCRC" ){
+			string $matchExprName[] = `listConnections ( $node + ".input[0]")`;
+            stringArrayInsertAtIndex (0, $connectionExprTr, $matchExprName[0]);
+		}
+    }    
+	textScrollList -e -ra objectScrollList;
+	textScrollList -e -ra objectScrollListLong;
+    textScrollList -e -ra qualityList;
+    textScrollList -e -ra thicknessList;
+    textScrollList -e -ra affectSegmentList;
+	int $z = `size $connectionExprTr `;
+	for ($i=0; $i<$z; ++$i){
+			if ($connectionExprTr[0] != "") {
+                int $valueSQ = (`getAttr ( $connectionExprTr[$i] + ".ShaveQuality" )` - 10 );
+                int $valueThc = (`getAttr ( $connectionExprTr[$i] + ".Thickness" )` - 10 );
+                int $valueAffectSeg = `getAttr ( $connectionExprTr[$i] + ".affectSegmet" )`;
+                textScrollList -e -ap ($i + 1) $connectionExprTr[$i] objectScrollList;
+                textScrollList -e -ap ($i + 1) $connectionExprTr[$i] objectScrollListLong;
+                textScrollList -e -ap ($i + 1) $valueSQ qualityList;
+                textScrollList -e -ap ($i + 1) $valueThc thicknessList;
+                textScrollList -e -ap ($i + 1) $valueAffectSeg affectSegmentList;                
+            }            
+	}
+	for ($n in $selList){
+		catchQuiet ( `textScrollList -e -si $n objectScrollList` );		
+	}
+	for ($n in $selListLong){
+		catchQuiet ( `textScrollList -e -si $n objectScrollListLong` );		
+	}
+return $connectionExprTr;
+}
+
+global proc string[] selectCRCObject(){
+	int $selIndex[] = `textScrollList -q -sii objectScrollList`;
+	int $z = `size $selIndex`;
+	textScrollList -e -da objectScrollListLong;
+	for ($i=0; $i<$z; ++$i){
+		textScrollList -e -sii $selIndex[$i] objectScrollListLong;
+	}
+	string $selList[] = `textScrollList -q -si objectScrollListLong`;
+	select -cl -all;
+	for ($i=0; $i<$z; ++$i){
+		select -add $selList[$i];
+	}
+	return $selList;
+}
+
+global proc removeCRCloc( int $mode ){
+	string $selTrList[] = `textScrollList -q -si objectScrollListLong`;
+	int $selTrListSize = `size $selTrList `;
+	string $expNodeName[]; 		// names of expression node for each selTrList
+	for ( $i=0; $i<$selTrListSize; ++$i ){ 
+		string $nameTr = `substituteAllString $selTrList[$i] ":" "_"`;
+		string $nameExpr = ( "exprCRC" + "_" + $nameTr );
+		stringArrayInsertAtIndex ($i, $expNodeName, $nameExpr );
+	}
+	
+	if ( `objExists expressionShaveSlider`){
+		if ($mode == 1 ) returnCRCData expressionShaveSlider;
+		delete expressionShaveSlider;
+	}
+	
+	for ($exprCRC in $expNodeName){
+		if (`objExists $exprCRC `) {
+			if (`attributeExists "shaveQualityData" $exprCRC`){
+				if ($mode == 1 ) returnCRCData $exprCRC;
+			}
+			delete $exprCRC;
+		}	
+	}
+	for ($tr in $selTrList) {
+		if (`attributeExists "ShaveQuality" $tr`){
+			deleteAttr ($tr + ".ShaveQuality");
+			deleteAttr ($tr + ".Thickness");
+		}
+		if (`attributeExists "CRC_Status" $tr`) {
+			deleteAttr ($tr + ".CRC_Status");
+		}
+        if (`attributeExists "affectSegmet" $tr`) {
+			deleteAttr ($tr + ".affectSegmet");
+		}
+	}
+	updateCRCObjectsInScene;
+}
+
+global proc addCRCloc(){
+// declare variables
+	int $n = 0;
+	string $selTrListExprName[] = {};
+    string $selTrList[] = `ls -os -l -tr`;
+	int $selTrListSize = `size $selTrList`;
+	string $selTrListShortNames[] = `ls -os -tr`;
+	string $expNodeName[]={}; 		// names of expression node for each selTrList
+	string $exprData[]; 		// sahve attributes data for each selTrList
+	string $exprArrayBind[];	// expression after dynamic binding ( one for each index selTrList )
+	string $expr[]; 			// expression after dynamic binding
+	string $exprDataTr;
+	for ( $i=0; $i<$selTrListSize; ++$i ){ 
+		$selTrListExprName[$i] = `substituteAllString $selTrList[$i] "|" "_"`;
+        $selTrListExprName[$i] = `substituteAllString $selTrListExprName[$i] ":" "_"`;
+		if (startsWith ($selTrListExprName[$i], "_" )) $selTrListExprName[$i] = `substitute "^_" $selTrListExprName[$i] ""`;
+        string $nameExpr = ( "exprCRC" + "_" + $selTrListExprName[$i] );
+		stringArrayInsertAtIndex ($i, $expNodeName, $nameExpr );
+	}
+   
+
+// check the CRC expression and shaveQualityData attributes that they exist. 
+// if exist, restore attributes data from shaveQualityData, remake CRC expression. 
+// ele create CRC expression amd attributes.
+	
+	if ( `objExists expressionShaveSlider`){
+		returnCRCData expressionShaveSlider;
+		delete expressionShaveSlider;
+	}
+		
+	for ($exprCRC in $expNodeName){
+		
+		if (`objExists $exprCRC`) {
+			if (`attributeExists "shaveQualityData" $exprCRC`){
+			returnCRCData $exprCRC;
+			}
+			delete $exprCRC;
+			expression -n $exprCRC;
+		} else {
+			expression -n $exprCRC;
+			addAttr -ln "shaveQualityData"  -dt "string" $exprCRC; 
+		}
+	}
+
+// collect attributes data in exprData 	
+	for ( $i=0; $i<$selTrListSize; ++$i ){
+		string $exprDataTr = `collectCRCData $selTrList[$i]`;
+		stringArrayInsertAtIndex( $i, $exprData, $exprDataTr );
+	}
+	
+// read expression from file and make binding variables	
+	
+	string $userScriptDir = "//SERVER-3D/Project/lib/setup/maya/maya_scripts_rfm4/LGT/";
+	string $exprArray[] = `textFileToStringArray (  $userScriptDir + "addCRC_expression.mel" )`;
+	$exprArrayBind = $exprArray;
+	int $exprArraySize = `size $exprArray `;
+	for ($t=0; $t<$selTrListSize; ++$t){
+		for ($i=0; $i<$exprArraySize; ++$i){
+			string $matchRoot = `match "$$nodeName" $exprArray[$i]`;
+			string $matchExpr = `match "$$exprName" $exprArray[$i]`;
+			if ( $matchRoot == "$$nodeName" ){
+				string $newString = `substituteAllString $exprArray[$i] "$$nodeName" $selTrListShortNames[$t]`;
+				$exprArrayBind[$i] = $newString;
+			}
+			if ($matchExpr == "$$exprName"){
+				string $newString = `substituteAllString $exprArray[$i] "$$exprName" $expNodeName[$t]`;					
+				$exprArrayBind[$i] = $newString;
+			}
+		}
+		string $exprTr = stringArrayToString ( $exprArrayBind, "" );
+		$expr[$t] = $exprTr;
+	}
+		
+		
+	
+//	checking and adding needed attributes 
+
+	for ($tr in $selTrList) {
+		if (`attributeExists "ShaveQuality" $tr`){
+			deleteAttr ($tr + ".ShaveQuality");
+			deleteAttr ($tr + ".Thickness");
+			addAttr -ln "ShaveQuality" -at long -min 1 -max 20 -dv 10 $tr;
+			addAttr -ln "Thickness" -at long -min 1 -max 20 -dv 10 $tr;
+			setAttr -e -keyable true -channelBox true ( $tr + ".ShaveQuality" );
+			setAttr -e -keyable true -channelBox true ( $tr + ".Thickness" );
+		} else {
+			addAttr -ln "ShaveQuality" -at long -min 1 -max 20 -dv 10 $tr;
+			addAttr -ln "Thickness" -at long -min 1 -max 20 -dv 10 $tr;
+			setAttr -e -keyable true -channelBox true ( $tr + ".ShaveQuality" );
+			setAttr -e -keyable true -channelBox true ( $tr + ".Thickness" );
+		}
+		if (`attributeExists "CRC_Status" $tr`) {
+			deleteAttr ($tr + ".CRC_Status");
+			addAttr -ln "CRC_Status" -at bool $tr;
+		} else {
+			addAttr -ln "CRC_Status" -at bool $tr;			
+		}
+		if (`attributeExists "affectSegmet" $tr`) {
+			deleteAttr ($tr + ".affectSegmet");
+			addAttr -ln "affectSegmet" -at bool $tr;
+		} else {
+			addAttr -ln "affectSegmet" -at bool $tr;			
+		}
+	}
+	for ($i=0; $i<$selTrListSize; $i++){
+		if (`attributeExists "shaveQualityData" $expNodeName[$i] `){
+			setAttr -typ "string" ( $expNodeName[$i] + ".shaveQualityData" ) $exprData[$i];
+			expression -e -s $expr[$i] -o "" -ae 0 -uc all $expNodeName[$i];
+		} else {
+			addAttr -ln "shaveQualityData"  -dt "string" $expNodeName[$i];
+			setAttr -typ "string" ( $expNodeName[$i] + ".shaveQualityData"  ) $exprData[$i];
+			expression -e -s $expr[$i] -o "" -ae 0 -uc all $expNodeName[$i];
+		}
+	}
+	updateCRCObjectsInScene;
+}
+
+// collect shave attribute data
+global proc string collectCRCData ( string $selTr ){
+	string $shaveShapeList[] = `listRelatives -ad -typ shaveHair $selTr `;
+	
+	string $hairCountName[];
+	string $hairSegmentsName[];
+	string $rootThicknessName[];
+	string $tipThicknessName[];
+	string $randScaleName[];
+	
+	int $hairCountValue[];
+	int $hairSegmentsValue[];
+	float $rootThicknessValue[];
+	float $tipThicknessValue[];
+	float $randScaleValue[];
+	
+	int $z = `size $shaveShapeList `;
+	for ( $i = 0; $i < $z; $i++ ) {
+
+		$hc_n = ( $shaveShapeList[$i] + ".hairCount" );
+		$hs_n = ( $shaveShapeList[$i] + ".hairSegments" );
+		$rt_n = ( $shaveShapeList[$i] + ".rootThickness" );
+		$tt_n = ( $shaveShapeList[$i] + ".tipThickness" );    
+		$rs_n = ( $shaveShapeList[$i] + ".randScale" ); 
+					
+		$hairCountName[$i] = $hc_n;
+		$hairSegmentsName[$i] = $hs_n;
+		$rootThicknessName[$i] = $rt_n;
+		$tipThicknessName[$i] = $tt_n;
+		$randScaleName[$i] = $rs_n;
+					
+		$hc_v = `getAttr $hc_n `;
+		$hs_v = `getAttr $hs_n `;
+		$rt_v = `getAttr $rt_n `;
+		$tt_v = `getAttr $tt_n `;
+		$rs_v = `getAttr $rs_n `; 
+
+		$hairCountValue[$i] = $hc_v;
+		$hairSegmentsValue[$i] = $hs_v;
+		$rootThicknessValue[$i] = $rt_v;
+		$tipThicknessValue[$i] = $tt_v;
+		$randScaleValue[$i] = $rs_v;
+		
+	}
+	
+	string $hairCountName_D = stringArrayToString ( $hairCountName, "&" );
+	string $hairSegmentsName_D = stringArrayToString ( $hairSegmentsName, "&" );
+	string $rootThicknessName_D = stringArrayToString ( $rootThicknessName, "&" );
+	string $tipThicknessName_D = stringArrayToString ( $tipThicknessName, "&" );
+	string $randScaleName_D = stringArrayToString ( $randScaleName, "&" );
+	
+	string $hairCountValue_D = intArrayToString ( $hairCountValue, "&" );
+	string $hairSegmentsValue_D = intArrayToString ( $hairSegmentsValue, "&" );
+	string $rootThicknessValue_D = floatArrayToString ( $rootThicknessValue, "&" );
+	string $tipThicknessValue_D = floatArrayToString ( $tipThicknessValue, "&" );
+	string $randScaleValue_D = floatArrayToString ( $randScaleValue, "&" );
+	
+	
+	string $exprDataAN = "%" + $hairCountName_D + "%" + $hairSegmentsName_D + "%" + $rootThicknessName_D + "%" + $tipThicknessName_D + "%" + $randScaleName_D;
+	string $exprDataAV = "%" + $hairCountValue_D + "%" + $hairSegmentsValue_D + "%" + $rootThicknessValue_D + "%" + $tipThicknessValue_D + "%" + $randScaleValue_D;
+	$exprDataTr = "$" + $exprDataAN + "$" + $exprDataAV;		
+	return $exprDataTr;
+}
+
+// return data from old expression and restore default attributes value
+global proc returnCRCData ( string $exprNode ) {
+	string $shaveQualityData = `getAttr ( $exprNode + ".shaveQualityData" )`;
+
+	string $data[] = stringToStringArray ($shaveQualityData, "$" );
+	string $data_AN = $data[0];
+	string $data_AV = $data[1];
+	string $data_ANa[] = stringToStringArray ($data_AN, "%" );
+	string $data_AVa[] = stringToStringArray ($data_AV, "%" );
+
+	string $hc_n[] = stringToStringArray ($data_ANa[0], "&" );
+	string $hs_n[] = stringToStringArray ($data_ANa[1], "&" );
+	string $rt_n[] = stringToStringArray ($data_ANa[2], "&" );
+	string $tt_n[] = stringToStringArray ($data_ANa[3], "&" );
+	string $rs_n[] = stringToStringArray ($data_ANa[4], "&" );
+
+	string $hc_v[]  = stringToStringArray ($data_AVa[0], "&" );
+	string $hs_v[]  = stringToStringArray ($data_AVa[1], "&" );
+	string $rt_v[]  = stringToStringArray ($data_AVa[2], "&" );
+	string $tt_v[]  = stringToStringArray ($data_AVa[3], "&" );
+	string $rs_v[]  = stringToStringArray ($data_AVa[4], "&" );
+
+	int $z = `size $hc_n`;
+
+	for ( $p=0; $p<$z; ++$p ){
+			
+		int $hc_v_cur = $hc_v[$p];
+		int   $hs_v_cur = $hs_v[$p];
+		float $rt_v_cur = $rt_v[$p];
+		float $tt_v_cur = $tt_v[$p];
+		float $rs_v_cur = $rs_v[$p];
+		
+		setAttr $hc_n[$p] $hc_v_cur;
+		setAttr $hs_n[$p] $hs_v_cur;
+		setAttr $rt_n[$p] $rt_v_cur;
+		setAttr $tt_n[$p] $tt_v_cur;
+		setAttr $rs_n[$p] $rs_v_cur;
+	}
+}

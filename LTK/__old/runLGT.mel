@@ -1,0 +1,3 @@
+source "//SERVER-3D/Project/lib/setup/maya/maya_scripts_rfm4/LGT/utilites.mel";
+source "//SERVER-3D/Project/lib/setup/maya/maya_scripts_rfm4/LGT/addCRCloc.mel";
+addCRClocUI;

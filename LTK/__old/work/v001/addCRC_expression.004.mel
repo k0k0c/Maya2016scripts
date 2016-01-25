@@ -1,0 +1,65 @@
+$$nodeName.CRC_Status = 1;
+int $CRC = $$nodeName.ShaveQuality;
+int $Thickness = $$nodeName.Thickness;
+int $affectSegmet = $$nodeName.affectSegmet;
+
+string $shaveQualityData = `getAttr $$exprName.shaveQualityData`;
+string $data[] = stringToStringArray ($shaveQualityData, "$" );
+string $data_AN = $data[0];
+string $data_AV = $data[1];
+string $data_ANa[] = stringToStringArray ($data_AN, "%" );
+string $data_AVa[] = stringToStringArray ($data_AV, "%" );
+
+string $hc_n[] = stringToStringArray ($data_ANa[0], "&" );
+string $hs_n[] = stringToStringArray ($data_ANa[1], "&" );
+string $rt_n[] = stringToStringArray ($data_ANa[2], "&" );
+string $tt_n[] = stringToStringArray ($data_ANa[3], "&" );
+string $rs_n[] = stringToStringArray ($data_ANa[4], "&" );
+
+string $hc_v[]  = stringToStringArray ($data_AVa[0], "&" );
+string $hs_v[]  = stringToStringArray ($data_AVa[1], "&" );
+string $rt_v[]  = stringToStringArray ($data_AVa[2], "&" );
+string $tt_v[]  = stringToStringArray ($data_AVa[3], "&" );
+string $rs_v[]  = stringToStringArray ($data_AVa[4], "&" );
+
+int $z = `size $hc_n`;
+
+float $SQindex = $CRC*0.1;
+float $ThicknessIndex = $Thickness*0.1;
+
+	for ( $p=0; $p<$z; ++$p ){
+
+		float $hc_v_cur = $hc_v[$p];
+		float $hs_v_cur = $hs_v[$p];
+		float $rt_v_cur = $rt_v[$p];
+		float $tt_v_cur = $tt_v[$p];
+		float $rs_v_cur = $rs_v[$p];
+
+
+		float $hc_v_SQ = $hc_v_cur*$SQindex;
+		setAttr $hc_n[$p] $hc_v_SQ;
+
+		if ( ( $CRC <= 10 )&&( $affectSegmet == 1 )){
+			float $SQ_inv = ( 11 - $CRC );
+			float $SQ_log = (`log $SQ_inv` * ( 0.01 + ( $hs_v_cur * 0.002)));
+			float $SQ_SegMult = ( $CRC * (0.1 + $SQ_log));
+			int $hs_v_SQ = $hs_v_cur*$SQ_SegMult;
+			if ( $hs_v_SQ > 0 ){
+				setAttr $hs_n[$p] $hs_v_SQ;
+			} else {
+				setAttr $hs_n[$p] 1;
+			}
+		} else {
+			setAttr $hs_n[$p] $hs_v_cur;
+		}
+
+		float $rt_v_SQ = $rt_v_cur / ( $SQindex/$ThicknessIndex );
+		setAttr $rt_n[$p] $rt_v_SQ;
+		
+		float $tt_v_SQ = $tt_v_cur / ( $SQindex/$ThicknessIndex );
+		setAttr $tt_n[$p] $tt_v_SQ;
+		
+		float $rs_v_SQ = $rs_v_cur*$SQindex;
+		setAttr $rs_n[$p] $rs_v_SQ;
+
+	}

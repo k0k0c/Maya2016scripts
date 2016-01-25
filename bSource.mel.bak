@@ -1,0 +1,6 @@
+global proc bSource (string $script) {  
+  
+     string $command = "source \"" + $script + " \" ";  
+     eval $command ;  
+  
+}

@@ -1,0 +1,333 @@
+// compute world bounding box and replace pivot
+global proc pivotModifer ( string $addLoc, int $a_X, int $a_Y, int $a_Z, string $target ) {
+    float $a;
+    float $bb_X_mid; 
+    float $bb_Y_mid;
+    float $bb_Z_mid;
+    float $bbr[];
+    if (`checkBox -q -ex addLocMovePivotCheckBox` == 1){
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 1)&&(`checkBox -q -v setPivotCheckBox` == 0)){
+            $addLoc = "l";
+        }
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 1)&&(`checkBox -q -v setPivotCheckBox` == 1)){
+            $addLoc = "pl";
+        }
+        if ((`checkBox -q -v addLocMovePivotCheckBox` == 0)&&(`checkBox -q -v setPivotCheckBox` == 1)){
+            $addLoc = "p";
+        }
+    }
+    // check whether $target instance
+    string $selShapes[] = `ls -s -dag $target`;
+    string $selTr[] = `ls -tr $target`;
+    string $selShapesParent[] = `listRelatives -f -ap $selShapes[0]`;
+    if ( `size $selShapesParent`  > 1 ) {
+        warning ( $target  + " is instance!\n" + $selShapesParent[0] + " is a new target" );
+        $target = $selShapesParent[0];        
+    }
+    string $tmpTargetName = (`substituteAllString $target "|" "_"` + "_tmp"); // temp node for compute bounding box
+    string $tmpTargetName = `substituteAllString $tmpTargetName ":" "_"`;
+    string $pM_grp = "pivotModiferTmp_grp";       // temp group
+    duplicate -rr -n $tmpTargetName $target;      
+    string $wParentCheck[] = `listRelatives -ap $tmpTargetName `;
+    if ( $wParentCheck[0] != "" ) parent -w $tmpTargetName;
+    string $wParent[] = `listRelatives -f -p $tmpTargetName`;
+    if ( `objExists $pM_grp` == 0 ) createNode -n $pM_grp transform;
+    parent -a $tmpTargetName $pM_grp;
+    if ( $wParent[0] != "" ) delete $wParent[0];
+    string $pM_grp_rem[] = `listRelatives -f -ad -typ "nurbsCurve" -typ "locator" -typ "transform" $pM_grp `;
+    for ($node in $pM_grp_rem){
+        if ((`nodeType $node` == "nurbsCurve")||(`nodeType $node` == "locator")) delete $node;
+        if ((`objExists $node` == 1)&&(`nodeType $node` == "transform")){
+            string $nodeChil[] = `listRelatives -ad $node`;
+            if ( $nodeChil[0] == "" ) delete $node;
+        }
+    }    
+    if ( `size $selShapesParent` <= 1 ) makeIdentity -apply true -t 1 -r 1 -s 1 -n 0 $pM_grp;
+    float $bbr[] = `xform -q -bbi $pM_grp `;
+    if ( `objExists $pM_grp` == 1 ) delete $pM_grp;
+    
+    // compute pivot position
+    if ( $bbr[0] > $bbr[3] ) {
+        $a = $bbr[0] - $bbr[3]; 
+        $bb_X_mid = $bbr[0] - $a*0.5*(2-$a_X);
+    }else{
+        $a = $bbr[3] - $bbr[0]; 
+        $bb_X_mid = $bbr[3] - $a*0.5*(2-$a_X);
+    }
+
+    if ( $bbr[1] > $bbr[4] ) {
+        $a = $bbr[1] - $bbr[4]; 
+        $bb_Y_mid = $bbr[1] - $a*0.5*(2-$a_Y);
+    }else{
+        $a = $bbr[4] - $bbr[1]; 
+        $bb_Y_mid = $bbr[4] - $a*0.5*(2-$a_Y);
+    }
+
+    if ( $bbr[2] > $bbr[5] ) {
+        $a = $bbr[2] - $bbr[5]; 
+        $bb_Z_mid = $bbr[2] - $a*0.5*(2-$a_Z);
+    }else{
+        $a = $bbr[5] - $bbr[2]; 
+        $bb_Z_mid = $bbr[5] - $a*0.5*(2-$a_Z);
+    }
+    // set pivot
+    if (($addLoc == "p")||($addLoc == "pl")){
+        xform  -ws -piv $bb_X_mid $bb_Y_mid $bb_Z_mid $target;
+    }
+    // set locator on new pivot position
+    if (($addLoc == "l")||($addLoc == "pl")){
+        string $dopName[] = `ls $target`;
+        string $dopNameC = `substituteAllString $dopName[0] "|" "_"`;
+        string $dopNameC = `substituteAllString $dopNameC ":" "_"`;
+        string $locName = ($dopNameC + "_locator" + "_X" + $a_X+ "_Y" + $a_Y+ "_Z" + $a_Z);
+        if (`objExists $locName` != 1) {
+            spaceLocator -a -n $locName -p $bb_X_mid $bb_Y_mid $bb_Z_mid;
+            xform  -ws -piv $bb_X_mid $bb_Y_mid $bb_Z_mid $locName;
+            parent -a $locName $target;
+        }
+    }
+}
+
+
+// parent RIB on GPU from Yashka Data
+global proc ribParentSys() {
+    string $system_tr = "|system";
+    string $gpu_cache_tr = ( $system_tr + "|gpu_cache" );
+    string $rib_cache_tr = ( $system_tr + "|rib_cache" );
+    string $all_gpu_tr_nosort[] = {};
+    string $all_rib_tr_nosort[] = {};
+    string $all_gpu_tr_n[] = {};
+    string $all_rib_tr_n[] = {};
+    string $all_gpu_tr_n_sort[] = {};
+    string $all_rib_tr_n_sort[] = {};
+    string $all_gpu_tr_sort[] = {};
+    string $all_rib_tr_sort[] = {};
+    string $all_gpu[] = `listRelatives -f -ad -typ gpuCache $gpu_cache_tr `;
+    string $all_rib[] = `listRelatives -f -ad -typ locator $rib_cache_tr `;
+    int $r;
+    int $g;
+    int $all_gpu_size = `size $all_gpu `;
+    int $all_rib_size = `size $all_rib`;
+    for ( $g=0; $g<$all_gpu_size; ++$g) {
+        string $gpuTr[] = `listRelatives -f -p $all_gpu[$g]`;
+        string $gpuTrShort[] = `listRelatives -p $all_gpu[$g]`;
+        pivotModifer p 1 0 1 $gpuTr[0];
+        stringArrayInsertAtIndex ($g, $all_gpu_tr_nosort, $gpuTr[0]);
+        string $tokGpu[] = {};
+        tokenize $gpuTr[0] "|" $tokGpu;
+        $tokGpu[2] = `substitute "_gpu" $tokGpu[2] ""`;
+        stringArrayInsertAtIndex ($g, $all_gpu_tr_n, $tokGpu[2]);
+    }
+    for ( $r=0; $r<$all_rib_size; ++$r ) {
+        string $ribTr[] = `listRelatives -f -p $all_rib[$r]`;
+        stringArrayInsertAtIndex ($r, $all_rib_tr_nosort, $ribTr[0]);
+        string $tokRib[] = {};
+        tokenize $ribTr[0] "|" $tokRib;
+        $tokRib[2] = `substitute "_rib" $tokRib[2] ""`;
+        stringArrayInsertAtIndex ($r, $all_rib_tr_n, $tokRib[2]);
+    }
+    
+    
+    
+    int $all_gpu_tr_n_z = `size $all_gpu_tr_n `;    
+    int $all_rib_tr_n_z = `size $all_rib_tr_n `;
+    for ( $g=0; $g<$all_gpu_tr_n_z; ++$g) {
+        for ( $r=0; $r<$all_rib_tr_n_z; ++$r){
+            if ($all_gpu_tr_n[$g] == $all_rib_tr_n[$r]){
+                stringArrayInsertAtIndex (0, $all_gpu_tr_sort, $all_gpu_tr_nosort[$g]);
+                stringArrayInsertAtIndex (0, $all_rib_tr_sort, $all_rib_tr_nosort[$r]);
+                stringArrayInsertAtIndex (0, $all_gpu_tr_n_sort, $all_gpu_tr_n[$g]);
+                stringArrayInsertAtIndex (0, $all_rib_tr_n_sort, $all_rib_tr_n[$r]);
+            }        
+        }
+    }
+   
+    if  ( $all_gpu_tr_n_z > $all_rib_tr_n_z ){
+        string $diff[] = stringArrayRemove( $all_rib_tr_n, $all_gpu_tr_n);
+        for ( $node in $diff ){
+            warning ( $node + "_rib does not exist" );
+        }
+        warning "the number of GPU greater than the number of RIB";
+    }
+    if ( $all_rib_tr_n_z > $all_gpu_tr_n_z ){
+        string $diff[] = stringArrayRemove( $all_gpu_tr_n, $all_rib_tr_n);
+        for ( $node in $diff ){
+            warning ( $node + "_gpu does not exist" );
+        }
+        warning "the number of RIB greater than the number of GPU";
+    }
+
+ 
+
+    string $rP_grp = "systemParented_grp";
+    if ( `objExists $rP_grp` == 0 ) createNode -n $rP_grp transform;
+ 
+    int $all_gpu_tr_sort_z = `size $all_gpu_tr_n_sort`;    
+    int $all_rib_tr_sort_z = `size $all_rib_tr_n_sort`;
+    for ( $i=0; $i<$all_gpu_tr_sort_z; ++$i){
+        string $gpu_instance_tr_n = $all_gpu_tr_n_sort[$i] + "_instance_gpu";
+        string $rib_instance_tr_n = $all_rib_tr_n_sort[$i] + "_instance_rib";
+        if ( (`objExists $gpu_instance_tr_n` == 0)&&(`objExists $rib_instance_tr_n` == 0)){
+            duplicate -ic -n $gpu_instance_tr_n $all_gpu_tr_sort[$i];
+            duplicate -ic -n $rib_instance_tr_n $all_rib_tr_sort[$i];
+            parent -r $rib_instance_tr_n $gpu_instance_tr_n;
+            parent -r $gpu_instance_tr_n $rP_grp;
+        }
+    }
+    hide "system";
+    select $rP_grp;
+ }
+ 
+ 
+ // parent alembic geocashe with rib on animators gpu cache
+global proc ribParentAnmGPU( int $fixRt, int $fixTr ){
+    float $rotate[] = {};
+    float $resultRO[] = {};
+    string $selParent[] = {};
+    string $uniqueParent;
+    
+    float $rotateX = `floatField -q -v fixRotateIntField_X`;
+    float $rotateY = `floatField -q -v fixRotateIntField_Y`;
+    float $rotateZ = `floatField -q -v fixRotateIntField_Z`;
+    
+    float $translateX = `floatField -q -v fixTranslateIntField_X`;
+    float $translateY = `floatField -q -v fixTranslateIntField_Y`;
+    float $translateZ = `floatField -q -v fixTranslateIntField_Z`;
+
+        
+    string $selRibGpu[] = `ls -l -os -tr`;
+    int $selSize = `size $selRibGpu`;
+    string $selParent[] = $selRibGpu;
+    string $selChil = $selRibGpu[$selSize-1];
+    stringArrayRemoveAtIndex (($selSize - 1), $selParent);
+    // get rotation from parent
+    for ($parentNode in $selParent){
+        string $selShapesParent[] = `listRelatives -f -ap $parentNode `;
+        if ( `size $selShapesParent`  > 1 ) {
+            warning ( $parentNode  + " is instance!\n" + $selShapesParent[0] + " is a new target" );            
+            string $parent[] = `listRelatives -f -p $parentNode `;
+            string $parentTok[] = {};
+            tokenize $parent[0] "|" $parentTok;
+            int $z = `size $parentTok`;
+            for ($i =0; $i < $z; ++$i){
+                string $patch = `substituteAllString $parent[0] ("|" + $parentTok[$z-$i-1]) ""`;
+                string $curPathParents[] = `listRelatives -f -ap $patch `;
+                if ( `size $curPathParents` == 1 ){
+                    $uniqueParent = $curPathParents[0];
+                    $i = $z;
+                }
+            }
+        }
+        $parentNode = $selShapesParent[0];
+
+        string $selChilTok[] = {};
+        tokenize $selChil "|" $selChilTok;
+        
+        string $selChilDup = ( $selChilTok[(`size $selChilTok` - 1)] + "_" + $uniqueParent + "_chil");
+        string $selChilDupLN[] = `duplicate -ic -n $selChilDup $selChil `;
+        // set rotation from parent on target
+        float $resultRO[] = `xform -q -ws -ro $parentNode `;
+        if ($fixRt == 0){
+            xform -ro $resultRO[0] ( $resultRO[1] + 90) $resultRO[2] $selChilDupLN[0];
+            floatField -e -v $resultRO[0] fixRotateIntField_X;
+            floatField -e -v $resultRO[1] fixRotateIntField_Y;
+            floatField -e -v $resultRO[2] fixRotateIntField_Z;
+        }
+        if ($fixRt == 1){
+            xform -ro $rotateX (0 - $rotateY) $rotateZ $selChilDupLN[0];
+        }
+        // set pivot on center of botom
+        pivotModifer pl 1 0 1 $selChilDupLN[0];
+        pivotModifer pl 1 0 1 $parentNode;
+        // set target on 0 grid
+        //float $resultRP[] = `xform -q -rp $selChilDupLN[0]`;
+        // xform -t (0 - $resultRP[0]) (0 - $resultRP[1]) (0 - $resultRP[2]) $selChilDupLN[0];
+        // parent $selChilDupLN on $parentNode
+        string $selChilDupLN_P[0] = `parent -a $selChilDupLN[0] $parentNode `;
+        // get parent world space pivot
+        float $curRP_p[] = `xform -q -ws -rp $parentNode `;
+        // correct target transformatiom based on world space pivot
+        float $curRP_c[] = `xform -q -ws -rp $selChilDupLN_P[0]`;
+        float $curTR[] = `xform -q -ws -t $selChilDupLN_P[0]`;
+        float $resultTR[];
+        
+        for ($i=0; $i<3; ++$i) {
+            $resultTR[$i] = $curTR[$i] - $curRP_c[$i] + $curRP_p[$i];
+        }
+        
+        /*
+        float $result[] = {};
+        float $result_dif[] = {};
+        
+        for ($i=0; $i<3; ++$i) {
+            if ( ($curRP_p[$i] > $curRP_c[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = $curRP_p[$i] - $curRP_c[$i];
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+            if ( ($curRP_c[$i] > $curRP_p[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = $curRP_c[$i] - $curRP_p[$i];
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+            if ( ($curRP_c[$i] == $curRP_p[$i])&&($fixTr == 0) ){
+                $result_dif[$i] = 0;
+                $curTR[$i] = $curTR[$i] + $result_dif[$i];
+            }
+        }
+        
+        
+        if ( $fixTr == 1 ){            
+            $curTR[0] = $translateX;
+            $curTR[1] = $translateY;
+            $curTR[2] = $translateZ;
+        }
+        if ( $fixTr == 0 ){
+            floatField -e -v $curTR[0] fixTranslateIntField_X;
+            floatField -e -v $curTR[1] fixTranslateIntField_Y;
+            floatField -e -v $curTR[2] fixTranslateIntField_Z;
+        }
+        */
+        xform -ws -t $resultTR[0] $resultTR[1] $resultTR[2] $selChilDupLN_P[0];
+        if ($fixRt == 0){
+            xform -a -ro $resultRO[0] ( 0 - $resultRO[1]) $resultRO[2] $selChilDupLN_P[0];
+            floatField -e -v $resultRO[0] fixRotateIntField_X;
+            floatField -e -v $resultRO[1] fixRotateIntField_Y;
+            floatField -e -v $resultRO[2] fixRotateIntField_Z;
+        }
+        if ($fixRt == 1){
+            xform -ro $rotateX (0 - $rotateY) $rotateZ $selChilDupLN_P[0];
+        }
+    }
+}
+
+// replace gpu on abc
+global proc convertGpuAbc(){
+    string $sel[] = `ls -sl`;
+    string $gpcList[] = `listRelatives -ad -f -typ "gpuCache" $sel`;
+
+    string $abcPathAllNode[];
+    string $trList[];
+    string $paL[];
+    int $n = -1;
+    int $nn = 0;
+
+    for ($gpcNode in $gpcList){
+        string $na = ++$n;
+        string $AlembicNodeName = ( "AlembicNode_" + $na );
+        string $gpcNodeParent[] = `listRelatives  -f -p $gpcNode`;
+
+        string $abcPathNode = `getAttr -as ( $gpcNode + ".cacheFileName" )`;
+        
+        createNode transform -p $gpcNodeParent[0] -n "abcFromGpu_grp";
+        
+        if ( `objExists "abcFromGpuRoot_grp"` == 0 ){
+                createNode transform -n "abcFromGpuRoot_grp";
+            } else {
+                print "abcFromGpuRoot_grp exist";
+            }
+        
+        string $abcFromGpu_grp = ( $gpcNodeParent[0] + "|abcFromGpu_grp" );
+        
+        AbcImport -mode import -rpr $abcFromGpu_grp $abcPathNode;
+        parent $abcFromGpu_grp abcFromGpuRoot_grp;
+    }
+}
