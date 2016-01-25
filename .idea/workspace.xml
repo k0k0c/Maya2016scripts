@@ -2,6 +2,146 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad0ee22f-d9e8-447f-ba39-9c32f42a0594" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Zoidberg/func/listFromView.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Zoidberg/func/ml_reference.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Zoidberg/func/ui_referenceEditor.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/.idea/LTK.iml" afterPath="$PROJECT_DIR$/Zoidberg/.idea/LTK.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/.idea/encodings.xml" afterPath="$PROJECT_DIR$/Zoidberg/.idea/encodings.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/.idea/misc.xml" afterPath="$PROJECT_DIR$/Zoidberg/.idea/misc.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/.idea/modules.xml" afterPath="$PROJECT_DIR$/Zoidberg/.idea/modules.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Zoidberg/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/disconnectShaveAttr.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/disconnectShaveAttr.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/makeCoordsys.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/makeCoordsys.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/makeCoordsys_noNS.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/makeCoordsys_noNS.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/mayaLgtTmp.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/mayaLgtTmp.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/removeVertex.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/removeVertex.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__mayafoo/ribConvert.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/ribConvert.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/.name" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/.name" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/LGT.iml" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/LGT.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/misc.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/misc.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/modules.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/modules.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/vcs.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/vcs.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/Thumbs.db" afterPath="$PROJECT_DIR$/Zoidberg/__old/Thumbs.db" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/addCRC_expression.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/addCRC_expression.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/addCRCloc.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/addCRCloc.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/addCRCloc.mel.bak" afterPath="$PROJECT_DIR$/Zoidberg/__old/addCRCloc.mel.bak" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/addCRCloc.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/addCRCloc.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/globalProcs_lgt.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/globalProcs_lgt.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_mw.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_mw.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_mw.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_mw.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test_1.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test_1.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test_1.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test_1.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/find_match_widget.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/find_match_widget.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/find_match_widget.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/find_match_widget.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/lgt_func.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/lgt_func.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lgt_py/rndPersBuild.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lgt_py/rndPersBuild.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/lighterToolls.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/lighterToolls.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacer.qrc" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacer.qrc" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacer.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v002/pivotReplacer.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacerUI/Thumbs.db" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/Thumbs.db" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.bmp" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.bmp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.png" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacer_img.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.psd" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.psd" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pivotReplacer_img.png" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/pyuic4.bat" afterPath="$PROJECT_DIR$/Zoidberg/__old/pyuic4.bat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/runLGT.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v002/runLGT.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/.name" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/.name" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/misc.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/misc.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/modules.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/modules.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/tacticHandler.iml" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/tacticHandler.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/vcs.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/.idea/vcs.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/tabdialog.pyw" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tabdialog.pyw" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/tacticHandler.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tacticHandler.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/tests.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tests.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/ui/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/ui/globalProcs.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/globalProcs.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/ui/ui_main.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/ui_main.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/tacticHandler/ui/ui_open.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/ui_open.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/Template.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/Template.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript (2).py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript (2).py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui (2).ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui (2).ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt (2).ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt (2).ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/logo.png" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/logo.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/widget.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/widget.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/test/widget_plugin.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/test/widget_plugin.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/ui_to_py.py" afterPath="$PROJECT_DIR$/Zoidberg/__old/ui_to_py.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/utilites.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/utilites.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/utilites.mel.bak" afterPath="$PROJECT_DIR$/Zoidberg/__old/utilites.mel.bak" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/addCRC_expression.004.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/addCRC_expression.004.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/addCRCloc.004.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/addCRCloc.004.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/pivotReplacer.004.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/pivotReplacer.004.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.002.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.002.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.002.mel.bak" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.002.mel.bak" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.003.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.003.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.004.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.004.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.005.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.005.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v001/utilites.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v002/addCRCloc.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v002/addCRCloc.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v002/addCRCloc.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v002/addCRCloc.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v002/pivotReplacer.ui" afterPath="$PROJECT_DIR$/Zoidberg/__old/pivotReplacer.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v002/runLGT.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/runLGT.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/__old/work/v002/utilites.mel" afterPath="$PROJECT_DIR$/Zoidberg/__old/work/v002/utilites.mel" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/config.py" afterPath="$PROJECT_DIR$/Zoidberg/config.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/func/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/func/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/func/ltk_func.py" afterPath="$PROJECT_DIR$/Zoidberg/func/ltk_func.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/func/maya_func.py" afterPath="$PROJECT_DIR$/Zoidberg/func/maya_func.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/func/setsOperator.py" afterPath="$PROJECT_DIR$/Zoidberg/func/setsOperator.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/func/ui_to_py.py" afterPath="$PROJECT_DIR$/Zoidberg/func/ui_to_py.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/mtest.py" afterPath="$PROJECT_DIR$/Zoidberg/mtest.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/setup.py" afterPath="$PROJECT_DIR$/Zoidberg/setup.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/setup_v01_test.py" afterPath="$PROJECT_DIR$/Zoidberg/setup_v01_test.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/setup_v02_test.py" afterPath="$PROJECT_DIR$/Zoidberg/setup_v02_test.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/__mayafoo/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/dock_expand_widget.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/dock_expand_widget.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/dockwidgets.pyw" afterPath="$PROJECT_DIR$/Zoidberg/tmp/dockwidgets.pyw" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/dockwidgets.qrc" afterPath="$PROJECT_DIR$/Zoidberg/tmp/dockwidgets.qrc" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/dockwidgets_rc2.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/dockwidgets_rc2.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/dockwidgets_rc3.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/dockwidgets_rc3.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/samples/keyModifyer.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/samples/keyModifyer.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/samples/listItem.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/samples/listItem.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/samples/mwdock.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/samples/mwdock.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/samples/qmwraper.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/samples/qmwraper.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/samples/qmwraper_plugin.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/samples/qmwraper_plugin.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/testdock.ui" afterPath="$PROJECT_DIR$/Zoidberg/tmp/testdock.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/tmp/tests.py" afterPath="$PROJECT_DIR$/Zoidberg/tmp/tests.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/LTK_main_ui.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/LTK_main_ui.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/__init__.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/backup/LTK_main_ui.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/backup/LTK_main_ui.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/backup/LTK_main_ui_rc_rc.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/backup/LTK_main_ui_rc_rc.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/setItemForm.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/setItemForm.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/pyuic/transferAttrUv_QWidget.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/pyuic/transferAttrUv_QWidget.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/LTK_main_ui.ui" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/LTK_main_ui.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/image/Thumbs.db" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/image/Thumbs.db" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/image/bb_g.png" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/image/bb_g.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/image/dr-manhattan2.jpg" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/image/dr-manhattan2.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/setItemForm.ui" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/setItemForm.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/tmp/LTK_find_match_widget_ui.ui" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/tmp/LTK_find_match_widget_ui.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/tmp/testdock.ui" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/tmp/testdock.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/qtd/transferAttrUv_QWidget.ui" afterPath="$PROJECT_DIR$/Zoidberg/ui/qtd/transferAttrUv_QWidget.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LTK/ui/setItemFormSetup.py" afterPath="$PROJECT_DIR$/Zoidberg/ui/setItemFormSetup.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scripts.iws" />
@@ -23,22 +163,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="getWidgetAtMouse.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/getWidgetAtMouse.py">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Zoidberg/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44850498">
-              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LTK/setup.py">
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Zoidberg/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.19444445">
+              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui_referenceEditor.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Zoidberg/func/ui_referenceEditor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
-              <folding />
+              <caret line="59" column="27" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mtest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Zoidberg/mtest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+              <folding>
+                <element signature="e#15#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +245,13 @@
         <option value="$PROJECT_DIR$/LTK/setup.py" />
         <option value="$PROJECT_DIR$/LTK/ui/pyuic/LTK_main_ui.py" />
         <option value="$PROJECT_DIR$/maya_scripts_rfm4/SSM/ui/ui_referenceEditor.py" />
-        <option value="$PROJECT_DIR$/getWidgetAtMouse.py" />
         <option value="$PROJECT_DIR$/addSQS_expression.mel" />
+        <option value="$PROJECT_DIR$/getWidgetAtMouse.py" />
+        <option value="$PROJECT_DIR$/LTK/func/ui_referenceEditor.py" />
+        <option value="$PROJECT_DIR$/Zoidberg/func/ui_to_py.py" />
+        <option value="$PROJECT_DIR$/Zoidberg/config.py" />
+        <option value="$PROJECT_DIR$/Zoidberg/mtest.py" />
+        <option value="$PROJECT_DIR$/Zoidberg/func/ui_referenceEditor.py" />
       </list>
     </option>
   </component>
@@ -108,7 +279,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -155,7 +326,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LTK" />
+              <option name="myItemId" value="Zoidberg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -169,7 +340,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LTK" />
+              <option name="myItemId" value="Zoidberg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -188,7 +359,12 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="&#9;null&#9;null" />
   </component>
-  <component name="RunManager" selected="Python.ui_to_py">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lighter\Documents\maya\2016\scripts\LTK\func" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.config">
     <configuration default="false" name="getWidgetAtMouse" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -236,6 +412,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="scripts" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LTK/setup.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="config" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Zoidberg" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="scripts" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Zoidberg/config.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -362,16 +555,18 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
       <item index="1" class="java.lang.String" itemvalue="Python.ui_to_py" />
       <item index="2" class="java.lang.String" itemvalue="Python.setup" />
+      <item index="3" class="java.lang.String" itemvalue="Python.config" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.ui_to_py" />
-        <item index="1" class="java.lang.String" itemvalue="Python.setup" />
-        <item index="2" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.config" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ui_to_py" />
+        <item index="2" class="java.lang.String" itemvalue="Python.setup" />
+        <item index="3" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
       </list>
     </recent_temporary>
   </component>
@@ -398,32 +593,38 @@
       <option name="project" value="LOCAL" />
       <updated>1453755614265</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="file referenceEditor add">
+      <created>1453714702685</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1453714702685</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1296" height="1040" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20906201" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33202356" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2857143" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33106577" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2857143" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23356009" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2027027" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265306" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994253" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3275862" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994253" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -440,7 +641,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pycharm workspace" />
     <MESSAGE value="melmaya replace" />
-    <option name="LAST_COMMIT_MESSAGE" value="melmaya replace" />
+    <MESSAGE value="file referenceEditor add" />
+    <option name="LAST_COMMIT_MESSAGE" value="file referenceEditor add" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -463,7 +665,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
@@ -524,6 +726,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25222552">
           <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -531,6 +734,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22700296">
           <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -538,6 +742,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22700296">
           <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -555,38 +760,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/pyuic/__init__.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/ui/pyuic/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/ltk_func.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/ltk_func.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="60" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17708333">
-          <caret line="7" column="63" selection-start-line="7" selection-start-column="63" selection-end-line="7" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/pyuic/LTK_main_ui.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/ui/pyuic/LTK_main_ui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22767857">
           <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/ui_to_py.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8348214">
-          <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -601,17 +792,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/setsOperator.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/setsOperator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22700296">
           <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/setItemFormSetup.py">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/ui/setItemFormSetup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -625,14 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.742268">
@@ -643,9 +827,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/getWidgetAtMouse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44850498">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.820598">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://S:/RnD/scripts/PyQt4/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/ui_to_py.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15957446">
+          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/mtest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/listFromView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.4827585">
+          <caret line="4" column="59" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/ml_reference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33271027">
+          <caret line="346" column="27" selection-start-line="346" selection-start-column="25" selection-end-line="346" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/ui_referenceEditor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="27" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Zoidberg/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19444445">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

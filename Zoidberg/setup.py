@@ -1,4 +1,4 @@
-import LTK.config
+import Zoidberg.config
 
 from PySide import QtGui
 import inspect
@@ -132,12 +132,12 @@ def startup():
     LTK.startup()
 
 if __name__ == "__main__":
-    # import LTK.setup as LTK
+    # import Zoidberg.setup as Zoidberg
     import sys
     app = QtGui.QApplication([])
     window = Ui_ltk_setup()
     window.show()
     sys.exit(app.exec_())
 
-    reload(LTK)
-    LTK.startup()
+    reload(Zoidberg)
+    Zoidberg.startup()

@@ -1,20 +1,20 @@
 # coding=utf-8
-import LTK.config
+# import config
 from PyQt4 import QtGui
 import inspect
 import collections
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import maya.mel as mel
-import func.ltk_func as func
-import func.maya_func as maya
-import func.ui_to_py as ui_to_py
-import func.setsOperator as sets
+# import func.ltk_func as func
+# import func.maya_func as maya
+# import func.ui_to_py as ui_to_py
+# import func.setsOperator as sets
 
-reload(func)
-reload(maya)
-reload(ui_to_py)
-reload(sets)
+# reload(func)
+# reload(maya)
+# reload(ui_to_py)
+# reload(sets)
 
 import ui.pyuic as ui
 
@@ -59,13 +59,10 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
 
     """
 
-    def __init__(self, parent=func.getMayaWindow()):
-        super(Ui_ltk_setup, self).__init__(parent)
-        self.maya_dock = self.parent().findChildren((QtGui.QDockWidget), 'dockControl1')
-        self.setObjectName("LTK")
-        self.setWindowTitle("------=LTK=-----")
-        self.mainWindow = parent
-        self.mainWindow.tabifyDockWidget(self.maya_dock[-1], self)
+    def __init__(self):
+        super(Ui_ltk_setup, self).__init__()
+        self.setObjectName("Zoidberg")
+        self.setWindowTitle("------=Zoidberg=-----")
         self.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
 
         self.dockWidgetContents = QtGui.QWidget()
@@ -130,7 +127,7 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
 
     @staticmethod
     def startup():
-        LTK = func.getMayaWindow().findChildren(QtGui.QDockWidget, "LTK")
+        LTK = func.getMayaWindow().findChildren(QtGui.QDockWidget, "Zoidberg")
         if len(LTK) > 1:
             for i in range(len(LTK) - 1):
                 LTK[i - 1].close()
@@ -140,7 +137,10 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
         LTK.show()
 
 
-def startup():
-    ui_to_py.init()
-    LTK = Ui_ltk_setup()
-    LTK.startup()
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication([])
+    window = Ui_ltk_setup()
+    window.show()
+    sys.exit(app.exec_())
+

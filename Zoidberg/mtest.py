@@ -1,40 +1,34 @@
 # coding=utf-8
-# import config
-from PyQt4 import QtGui
+import Zoidberg.config
+from PySide import QtGui
 import inspect
 import collections
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PySide.QtGui import *
+from PySide.QtCore import *
 import maya.mel as mel
-# import func.ltk_func as func
-# import func.maya_func as maya
-# import func.ui_to_py as ui_to_py
-# import func.setsOperator as sets
+import func.ltk_func as func
+import func.maya_func as maya
+import func.ui_to_py as ui_to_py
+import func.setsOperator as sets
+import func.ui_referenceEditor as refEdit
 
-# reload(func)
-# reload(maya)
-# reload(ui_to_py)
-# reload(sets)
+reload(func)
+reload(maya)
+reload(ui_to_py)
+reload(sets)
+reload(refEdit)
 
 import ui.pyuic as ui
 
 reload(ui)
 
+
+
 def printClick():
     print "Cklicked!"
 # a = QTabBar.connect(SIGNAL("tabBarClicked(int)", lambda: printClick()))
 
-class MQDockWidget(QDockWidget):
-    def mousePressEvent(self, *args, **kwargs): # real signature unknown
-        print "Mouse press event"
-
-    def hideEvent(self, *args, **kwargs): # real signature unknown
-        print "Hide event"
-
-    def showEvent(self, *args, **kwargs): # real signature unknown
-        print "Show event"
-
-class Ui_ltk_setup(MQDockWidget, QWidget):
+class Zoidberg_form(QDockWidget, QWidget):
     """
     Структура:
 
@@ -59,22 +53,28 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
 
     """
 
-    def __init__(self):
-        super(Ui_ltk_setup, self).__init__()
-        self.setObjectName("LTK")
-        self.setWindowTitle("------=LTK=-----")
+    def __init__(self, parent=func.getMayaWindow()):
+        super(Zoidberg_form, self).__init__(parent)
+        self.maya_dock = self.parent().findChildren((QtGui.QDockWidget), 'dockControl1')
+        self.setObjectName("Zoidberg")
+        self.setWindowTitle("------=Zoidberg=-----")
+        self.mainWindow = parent
+        self.mainWindow.tabifyDockWidget(self.maya_dock[-1], self)
         self.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
+
+        self.refEdit = refEdit.referenceEditor(self)
+        self.refEdit.load()
 
         self.dockWidgetContents = QtGui.QWidget()
         self.setWidget(self.dockWidgetContents)
         self.mainQL = QVBoxLayout(self.dockWidgetContents)
-        self.mainQL.setMargin(0)
+        self.mainQL.setContentsMargins(0, 0, 0, 0)
         self.mainQMW = QMainWindow()
         self.mainQL.addWidget(self.mainQMW)
         # self.mainQMW.
 
         self.tabList = ("Lighting", "Rendering", "Modeling")
-        self.dockList = ("copy", "paste", "eggs", "delete", "move")
+        self.dockList = ("reference", "paste", "eggs", "delete", "move")
         self.existTabs = []
         self.existDock = {}
         self.createTab(self.tabList)
@@ -87,6 +87,7 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
         # print self.tabbar[0].receivers(SIGNAL("tabBarClicked(-1)"))
         # print self.tabbar[0].senderSignalIndex()
 
+
     def createTab(self, tablist):
         for tab in tablist:
             tabQMW= QMainWindow()
@@ -97,10 +98,10 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
             tabCW = QListWidget(tabQMW)
             tabCW.hide()
             tabQMW.setCentralWidget(tabCW)
-            tabTopQDW = MQDockWidget()
+            tabTopQDW = QDockWidget()
             tabTopQDW.setWindowTitle(tab)
             tabTopQDW.setObjectName(tab + "_tab")
-            existFirstTopTab = self.mainQMW.findChildren(MQDockWidget, tablist[0] + "_tab")
+            existFirstTopTab = self.mainQMW.findChildren(QDockWidget, tablist[0] + "_tab")
             self.mainQMW.addDockWidget(Qt.RightDockWidgetArea, tabTopQDW)
             if existFirstTopTab:
                 self.mainQMW.tabifyDockWidget(existFirstTopTab[0], tabTopQDW)
@@ -111,7 +112,7 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
         for tab in self.existTabs:
             if tab.objectName() == tablist + "_mv":
                 for dockName in dockList:
-                    dock = MQDockWidget(tab)
+                    dock = QDockWidget(tab)
                     dock.setFeatures(
                         QtGui.QDockWidget.DockWidgetFloatable |
                         QtGui.QDockWidget.DockWidgetMovable |
@@ -120,6 +121,8 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
                     dock.setWindowTitle(dockName)
                     self.existDock.setdefault(tab, []).append(dock)
                     tab.addDockWidget(Qt.RightDockWidgetArea, dock)
+                    if dockName == "reference":
+                        dock.setWidget(self.refEdit)
 
     def closeEvent(self, QCloseEvent):
         self.deleteLater()
@@ -127,20 +130,17 @@ class Ui_ltk_setup(MQDockWidget, QWidget):
 
     @staticmethod
     def startup():
-        LTK = func.getMayaWindow().findChildren(QtGui.QDockWidget, "LTK")
-        if len(LTK) > 1:
-            for i in range(len(LTK) - 1):
-                LTK[i - 1].close()
-        LTK = LTK[0]
-        if func.getMayaWindow().tabifiedDockWidgets(LTK):
-            func.getMayaWindow().tabifyDockWidget(func.getMayaWindow().tabifiedDockWidgets(LTK)[0], LTK)
-        LTK.show()
+        Zoidberg = func.getMayaWindow().findChildren(QtGui.QDockWidget, "Zoidberg")
+        if len(Zoidberg) > 1:
+            for i in range(len(Zoidberg) - 1):
+                Zoidberg[i - 1].close()
+        Zoidberg = Zoidberg[0]
+        if func.getMayaWindow().tabifiedDockWidgets(Zoidberg):
+            func.getMayaWindow().tabifyDockWidget(func.getMayaWindow().tabifiedDockWidgets(Zoidberg)[0], Zoidberg)
+        Zoidberg.show()
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication([])
-    window = Ui_ltk_setup()
-    window.show()
-    sys.exit(app.exec_())
-
+def startup():
+    ui_to_py.init()
+    Zoidberg = Zoidberg_form()
+    Zoidberg.startup()
