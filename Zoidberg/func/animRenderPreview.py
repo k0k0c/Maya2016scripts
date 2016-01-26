@@ -3,8 +3,6 @@ import maya.cmds as cmds
 import maya.mel as mel
 
 from deadlineSceneName import *
-from PySide import QtGui, QtCore
-import render_settings as rsrs
 from PySide import QtCore, QtGui
 import shiboken
 import maya.OpenMayaUI as mayaUi
@@ -79,8 +77,10 @@ class ChooseCamForRender(object):
 
 class AnimPreviwRender(object):
     def __init__(self):
-        self.renderPatch = renderPath()
+        self.lightName = "rsDome_preRenderShape"
+        self.renderPatch = renderPath("preview")
         self.scenePatch = cmds.file(q=True, sn=True)[0:32]
+        self.sceneName = cmds.file(q=True, sn=True, shn=True).split(".")[0]
 
     def checkPatch(self):
         if self.scenePatch == "//samba/Space_Academy/Animation/":
@@ -115,16 +115,16 @@ class AnimPreviwRender(object):
 
 
         # Common
+        cmds.setAttr("defaultRenderGlobals.imageFilePrefix", self.sceneName + "_preview", type="string")
         cmds.setAttr("defaultRenderGlobals.animation", 1)
         cmds.setAttr("defaultRenderGlobals.startFrame", minFrame)
         cmds.setAttr("defaultRenderGlobals.endFrame", maxFrame)
         cmds.setAttr("defaultRenderGlobals.byFrameStep", 1)
         cmds.setAttr("defaultRenderGlobals.extensionPadding", 4)
 
-        cmds.setAttr("redshiftOptions.imageFormat", 1)
-        cmds.setAttr("redshiftOptions.exrBits", 16)
-        cmds.setAttr("redshiftOptions.exrCompression", 0)
-        cmds.setAttr("redshiftOptions.exrIsTiled", 0)
+        cmds.setAttr("redshiftOptions.imageFormat", 4)
+        cmds.setAttr("redshiftOptions.jpegQuality", 95)
+
         cmds.setAttr("defaultResolution.width", 1280)
         cmds.setAttr("defaultResolution.height", 720)
         cmds.setAttr("defaultResolution.deviceAspectRatio", 1.777)
@@ -164,7 +164,13 @@ class AnimPreviwRender(object):
         cmds.setAttr("redshiftOptions.subsurfaceScatteringNumGIRays", 32)
 
         # deadline
+        if cmds.attributeQuery("deadlineJobName", node="defaultRenderGlobals", ex=True):
+            jobName = cmds.getAttr("defaultRenderGlobals.deadlineJobName").split("_preview")[0] + "_preview"
+            cmds.setAttr("defaultRenderGlobals.deadlineJobName", jobName, type="string")
         cmds.setAttr("defaultRenderGlobals.deadlineGroup", "preview", typ="string")
+        cmds.setAttr("defaultRenderGlobals.deadlineJobPriority", 20)
+        cmds.setAttr("defaultRenderGlobals.deadlineOutputFilePath", self.renderPatch, typ="string")
+        cmds.setAttr("defaultRenderGlobals.imfPluginKey", "jpg", typ="string")
 
     def setAovEnable(self, set=0, sw=None):
         redshiftAOVnodes = cmds.ls(typ="RedshiftAOV")
@@ -180,7 +186,6 @@ class AnimPreviwRender(object):
 
     def lightSetup(self):
         # Hide existing lights
-        lightName = "rsDome_preRenderShape"
         rsLights = []
         existLights = cmds.ls(lt=True)
         rsTypeList = ["RedshiftDomeLight", "RedshiftPortalLight", "RedshiftIESLight", "RedshiftPhysicalLight"]
@@ -191,18 +196,18 @@ class AnimPreviwRender(object):
         existLights.extend(rsLights)
 
         for node in existLights:
-            if node != lightName:
+            if node != self.lightName:
                 n = cmds.listRelatives(node, p=True)
                 cmds.setAttr(n[0] + ".visibility", 0)
 
         # Create a new rsDome light
-        if not cmds.objExists(lightName):
-            cmds.shadingNode("RedshiftDomeLight", name=lightName, asLight=True)
+        if not cmds.objExists(self.lightName):
+            cmds.shadingNode("RedshiftDomeLight", name=self.lightName, asLight=True)
         else:
-            cmds.setAttr(lightName + ".samples", 8)
-            cmds.setAttr(lightName + ".viewportResolution", 512)
-            cmds.setAttr(lightName + ".volumeNumSamples", 1)
-            cmds.setAttr(lightName + ".background_enable", 0)
+            cmds.setAttr(self.lightName + ".samples", 8)
+            cmds.setAttr(self.lightName + ".viewportResolution", 512)
+            cmds.setAttr(self.lightName + ".volumeNumSamples", 1)
+            cmds.setAttr(self.lightName + ".background_enable", 0)
 
     def setProxy(self, value=0):
         for curv in cmds.ls(typ="transform"):
@@ -211,11 +216,14 @@ class AnimPreviwRender(object):
                     cmds.setAttr(curv + ".Proxy", value)
 
     def submitJob(self, cam=None):
+        mel.eval("SubmitJobToDeadline;")
+        # cmds.deleteUI()
         self.renderSetup()
         self.setAovEnable()
         self.lightSetup()
         self.setProxy()
         mel.eval("SubmitJobToDeadline;DeadlineSubmitterOnOk();")
+        cmds.delete(cmds.listRelatives(self.lightName, p=True))
 
     def startup(self):
         pathcheck = self.checkPatch()
