@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad0ee22f-d9e8-447f-ba39-9c32f42a0594" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mayaSt.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testMayaBatch.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sssssssssssssssssss.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scripts.iws" />
@@ -33,31 +36,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addSQS_expression.mel" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+      <file leaf-file-name="animRenderPreview.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Zoidberg/func/animRenderPreview.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+              <caret line="219" column="25" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addSQS_expression.mel" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.12027972">
               <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sssssssssssssssssss.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sssssssssssssssssss.py">
+      <file leaf-file-name="testMayaBatch.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testMayaBatch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LTK/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
+              <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -78,10 +81,8 @@
         <option value="k0k0c &lt;zavizal@gmail.com&gt;" />
       </list>
     </option>
-    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="FORCE_PUSH_ALLOWED" value="true" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -110,6 +111,8 @@
         <option value="$PROJECT_DIR$/getWidgetAtMouse.py" />
         <option value="$PROJECT_DIR$/addSQS_expression.mel" />
         <option value="$PROJECT_DIR$/WWWWW.py" />
+        <option value="$PROJECT_DIR$/testMayaBatch.py" />
+        <option value="$PROJECT_DIR$/mayaSt.py" />
       </list>
     </option>
   </component>
@@ -203,11 +206,429 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/helpers" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="&#9;null&#9;null" />
   </component>
-  <component name="RunManager" selected="Python.ui_to_py">
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/.idea/LTK.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/.idea/encodings.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/disconnectShaveAttr.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/makeCoordsys.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/makeCoordsys_noNS.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/mayaLgtTmp.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/removeVertex.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__mayafoo/ribConvert.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/.name</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/LGT.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/vcs.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/addCRC_expression.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/addCRCloc.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/addCRCloc.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/addCRCloc.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/globalProcs_lgt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_mw.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_mw.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test_1.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/addCRCloc_test_1.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/find_match_widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/find_match_widget.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/lgt_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lgt_py/rndPersBuild.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/lighterToolls.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacer.qrc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacer.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.bmp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacerUI/pivotReplacer_img.psd</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pivotReplacer_img.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/pyuic4.bat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/runLGT.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/.name</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/tacticHandler.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/vcs.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tabdialog.pyw</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tacticHandler.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/tests.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/globalProcs.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/ui_main.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/tacticHandler/ui/ui_open.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/Template.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript (2).py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui (2).ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt (2).ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/logo.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/test/widget_plugin.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/ui_to_py.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/utilites.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/addCRC_expression.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/addCRCloc.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/pivotReplacer.004.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.002.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.002.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.003.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.005.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v001/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v002/addCRCloc.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v002/addCRCloc.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v002/pivotReplacer.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v002/runLGT.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/__old/work/v002/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/config.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/animRenderPreview.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/deadlineSceneName.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/listFromView.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/ltk_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/maya_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/ml_reference.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/setsOperator.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/ui_referenceEditor.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/func/ui_to_py.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/mtest.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/setup.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/setup_v01_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/setup_v02_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/dock_expand_widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/dockwidgets.pyw</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/dockwidgets.qrc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/dockwidgets_rc2.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/dockwidgets_rc3.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/samples/keyModifyer.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/samples/listItem.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/samples/mwdock.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/samples/qmwraper.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/samples/qmwraper_plugin.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/testdock.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/tmp/tests.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/LTK_main_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/backup/LTK_main_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/backup/LTK_main_ui_rc_rc.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/setItemForm.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/pyuic/transferAttrUv_QWidget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/LTK_main_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/image/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/image/bb_g.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/image/dr-manhattan2.jpg</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/setItemForm.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/tmp/LTK_find_match_widget_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/tmp/testdock.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/qtd/transferAttrUv_QWidget.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/addBookmark.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/addProxy.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/arrow_hollow_down.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/arrows-right-circular-icon.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/black_down_arrow2.jpg</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/checkboxOff.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/checkboxOn.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/createReference.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/duplicateReference.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/filterOff.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/filterOn.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/reference.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/referenceProxy.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/referenceProxy_damaged.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/reference_damaged.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/reference_disabled.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/refresh.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/refreshGray.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/reloadReference.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/remove.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/removeReference.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/save.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-closed-scaled.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-closed.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-end.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-more.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-open-scaled.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-branch-open.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/resources/stylesheet-vline.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Zoidberg/ui/setItemFormSetup.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/.idea/LTK.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/.idea/encodings.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/disconnectShaveAttr.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/makeCoordsys.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/makeCoordsys_noNS.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/mayaLgtTmp.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/removeVertex.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__mayafoo/ribConvert.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/.name</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/LGT.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/vcs.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/addCRC_expression.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/addCRCloc.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/addCRCloc.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/addCRCloc.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/globalProcs_lgt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_mw.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_mw.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test_1.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/addCRCloc_test_1.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/find_match_widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/find_match_widget.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/lgt_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lgt_py/rndPersBuild.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/lighterToolls.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacer.qrc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacer.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacerUI/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.bmp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacerUI/pivotReplacer_img.psd</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pivotReplacer_img.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/pyuic4.bat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/runLGT.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/.name</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/tacticHandler.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/vcs.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/tabdialog.pyw</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/tacticHandler.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/tests.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/ui/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/ui/globalProcs.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/ui/ui_main.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/tacticHandler/ui/ui_open.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/Template.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/makeCube_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript (2).py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui (2).ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Python Files/masterScript_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath (2).py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt (2).ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/jointPath_dt.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/logo.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/mainWindow_dt.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/Creating Custom User Interfaces in Maya and Qt Designer/Qt Designer Files/makeCube.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/test/widget_plugin.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/ui_to_py.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/utilites.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/addCRC_expression.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/addCRCloc.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/pivotReplacer.004.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.002.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.002.mel.bak</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.003.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.004.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.005.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v001/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v002/addCRCloc.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v002/addCRCloc.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v002/pivotReplacer.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v002/runLGT.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/__old/work/v002/utilites.mel</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/config.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/func/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/func/ltk_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/func/maya_func.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/func/setsOperator.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/func/ui_to_py.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/mtest.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/setup.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/setup_v01_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/setup_v02_test.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/dock_expand_widget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/dockwidgets.pyw</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/dockwidgets.qrc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/dockwidgets_rc2.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/dockwidgets_rc3.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/samples/keyModifyer.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/samples/listItem.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/samples/mwdock.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/samples/qmwraper.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/samples/qmwraper_plugin.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/testdock.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/tmp/tests.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/LTK_main_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/backup/LTK_main_ui.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/backup/LTK_main_ui_rc_rc.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/setItemForm.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/pyuic/transferAttrUv_QWidget.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/LTK_main_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/image/Thumbs.db</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/image/bb_g.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/image/dr-manhattan2.jpg</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/setItemForm.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/tmp/LTK_find_match_widget_ui.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/tmp/testdock.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/qtd/transferAttrUv_QWidget.ui</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/LTK/ui/setItemFormSetup.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunManager" selected="Python.mayaSt">
     <configuration default="false" name="getWidgetAtMouse" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -255,6 +676,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="scripts" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LTK/setup.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="mayaSt" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="scripts" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mayaSt.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -381,16 +819,18 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
       <item index="1" class="java.lang.String" itemvalue="Python.ui_to_py" />
       <item index="2" class="java.lang.String" itemvalue="Python.setup" />
+      <item index="3" class="java.lang.String" itemvalue="Python.mayaSt" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.ui_to_py" />
-        <item index="1" class="java.lang.String" itemvalue="Python.setup" />
-        <item index="2" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.mayaSt" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ui_to_py" />
+        <item index="2" class="java.lang.String" itemvalue="Python.setup" />
+        <item index="3" class="java.lang.String" itemvalue="Python.getWidgetAtMouse" />
       </list>
     </recent_temporary>
   </component>
@@ -459,28 +899,34 @@
       <option name="project" value="LOCAL" />
       <updated>1453833636724</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="test commit&#10;">
+      <created>1453833669979</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1453833669979</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20969442" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22813489" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27210215" sideWeight="0.53793466" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5021075" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33202356" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27210215" sideWeight="0.46206534" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27013752" sideWeight="0.4557429" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24557957" sideWeight="0.7455216" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907662" sideWeight="0.49789253" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3275862" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -526,7 +972,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sssssssssssssssssss.py">
+    <entry file="file://$PROJECT_DIR$/testMayaBatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Autodesk/Maya2016/bin/python27.zip!/glob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaSt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -534,10 +996,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
+    <entry file="file://$PROJECT_DIR$/getWidgetAtMouse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMayaBatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getWidgetAtMouse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMayaBatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -558,14 +1060,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/getWidgetAtMouse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -578,14 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -681,41 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/pyuic/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/ltk_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="60" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17708333">
-          <caret line="7" column="63" selection-start-line="7" selection-start-column="63" selection-end-line="7" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/pyuic/LTK_main_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22767857">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/ui_to_py.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8348214">
-          <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/-378082307/PySide/QtCore/Qt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3323442">
@@ -737,20 +1188,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/func/setsOperator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22700296">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/ui/setItemFormSetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/-378082307/PySide/QtGui/QAction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.9643917">
@@ -758,10 +1195,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LTK/setup.py">
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/-378082307/maya/standalone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="115" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.20675676">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Autodesk/Maya2016/bin/python27.zip!/glob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42797202">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -774,18 +1218,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+    <entry file="file://$PROJECT_DIR$/Zoidberg/func/animRenderPreview.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <caret line="219" column="25" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sssssssssssssssssss.py">
+    <entry file="file://$PROJECT_DIR$/mayaSt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23776224">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMayaBatch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addSQS_expression.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12027972">
+          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
           <folding />
         </state>
       </provider>
