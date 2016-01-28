@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:/Users/MikhailKorovkin/Documents/maya/2016/scripts/LTK/ui/qtd/transferAttrUv_QWidget.ui'
+# Form implementation generated from reading ui file 'c:/Users/lighter/Documents/maya/2016/scripts/Zoidberg/ui/qtd/transferAttrUv_QWidget.ui'
 #
-# Created: Sun Jan 24 21:55:02 2016
+# Created: Mon Jan 25 12:57:16 2016
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!

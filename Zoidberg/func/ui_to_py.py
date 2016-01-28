@@ -1,10 +1,11 @@
-import LTK.config as config
+import Zoidberg.config as config
+reload(config)
 import pysideuic as uic
 import sys
 import os
 from subprocess import call
 
-LTK_PATCH = config.LTK_PATCH
+LTK_PATCH = config.MAIN_PATCH
 LGT_UI_PATCH = 'ui/qtd/'
 LGT_PYUI_PATCH = 'ui/pyuic/'
 file_ui_list = []

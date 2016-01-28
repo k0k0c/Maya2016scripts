@@ -1,4 +1,4 @@
-import LTK.config
+import Zoidberg.config
 
 from PyQt4 import QtGui
 import inspect
